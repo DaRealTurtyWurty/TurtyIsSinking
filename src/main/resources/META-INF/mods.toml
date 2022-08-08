@@ -1,0 +1,18 @@
+modLoader="javafml"
+loaderVersion="[43,)"
+license="LGPL 3.0"
+issueTrackerURL="https://github.com/DaRealTurtyWurty/TurtyIsSinking/issues"
+
+[[mods]]
+modId="turtyissinking"
+version="0.1 - Dev"
+displayName="Turty Is Sinking"
+#TODO: Uncomment me:
+#updateJSONURL="https://github.com/DaRealTurtyWurty/TurtyIsSinking/updates.json"
+displayURL="https://github.com/DaRealTurtyWurty/TurtyIsSinking"
+logoFile="logo.png"
+credits="N/A"
+authors="TurtyWurty (https://youtube.com/TurtyWurty)"
+description='''
+A kitchen sink mod for Minecraft that adds a bunch of random things such as machines, utility items, food, entities and much more!
+'''
