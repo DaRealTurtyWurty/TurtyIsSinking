@@ -144,8 +144,6 @@ public class BonesawScreen extends Screen {
             final PlayerBones cap = this.minecraft.player.getCapability(PlayerBonesCapability.PLAYER_BONES)
                 .orElseThrow(() -> new IllegalStateException("Player does not contain a player bones capability."));
             this.active = !cap.getSawn().contains(this.bone);
-            TurtyIsSinking.LOGGER
-                .info(cap.getSawn().stream().map(PlayerBone::name).reduce((str, str1) -> str + ", " + str1).orElse(""));
         }
         
         @Override
@@ -153,7 +151,7 @@ public class BonesawScreen extends Screen {
             if (isMouseOver(pMouseX, pMouseY)) {
                 this.active = false;
                 this.minecraft.player.getCapability(PlayerBonesCapability.PLAYER_BONES)
-                    .ifPresent(cap -> cap.saw(this.bone));
+                    .ifPresent(cap -> cap.saw(this.minecraft.player, this.bone));
                 PacketHandler.INSTANCE.sendToServer(new SSawBonePacket(this.bone));
                 return true;
             }

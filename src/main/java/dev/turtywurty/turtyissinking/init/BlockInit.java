@@ -3,6 +3,8 @@ package dev.turtywurty.turtyissinking.init;
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
 import dev.turtywurty.turtyissinking.blocks.BackpackBlock;
 import dev.turtywurty.turtyissinking.blocks.ExpOreBlock;
+import dev.turtywurty.turtyissinking.blocks.PlayerBoneBlock;
+import dev.turtywurty.turtyissinking.client.screens.BonesawScreen.PlayerBone;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -20,4 +22,20 @@ public class BlockInit {
 
     public static final RegistryObject<ExpOreBlock> EXP_ORE = BLOCKS.register("exp_ore",
         () -> new ExpOreBlock(BlockBehaviour.Properties.copy(Blocks.COAL_ORE)));
+    
+    public static final RegistryObject<PlayerBoneBlock> PLAYER_LEFT_ARM = BLOCKS.register("player_left_arm",
+        () -> new PlayerBoneBlock(BlockBehaviour.Properties.of(Material.EGG).dynamicShape().noOcclusion(),
+            PlayerBone.LEFT_ARM));
+    public static final RegistryObject<PlayerBoneBlock> PLAYER_RIGHT_ARM = BLOCKS.register("player_right_arm",
+        () -> new PlayerBoneBlock(BlockBehaviour.Properties.of(Material.EGG).dynamicShape().noOcclusion(),
+            PlayerBone.RIGHT_ARM));
+    public static final RegistryObject<PlayerBoneBlock> PLAYER_LEFT_LEG = BLOCKS.register("player_left_leg",
+        () -> new PlayerBoneBlock(BlockBehaviour.Properties.of(Material.EGG).dynamicShape().noOcclusion(),
+            PlayerBone.LEFT_LEG));
+    public static final RegistryObject<PlayerBoneBlock> PLAYER_RIGHT_LEG = BLOCKS.register("player_right_leg",
+        () -> new PlayerBoneBlock(BlockBehaviour.Properties.of(Material.EGG).dynamicShape().noOcclusion(),
+            PlayerBone.RIGHT_LEG));
+    public static final RegistryObject<PlayerBoneBlock> PLAYER_BODY = BLOCKS.register("player_body",
+        () -> new PlayerBoneBlock(BlockBehaviour.Properties.of(Material.EGG).dynamicShape().noOcclusion(),
+            PlayerBone.BODY));
 }

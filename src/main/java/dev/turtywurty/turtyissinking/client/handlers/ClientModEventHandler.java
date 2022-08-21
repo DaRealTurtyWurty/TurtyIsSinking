@@ -7,6 +7,7 @@ import dev.turtywurty.turtyissinking.client.models.BackpackModel;
 import dev.turtywurty.turtyissinking.client.models.BossBabyModel;
 import dev.turtywurty.turtyissinking.client.models.WheelchairModel;
 import dev.turtywurty.turtyissinking.client.renderers.blockentity.BackpackBERenderer;
+import dev.turtywurty.turtyissinking.client.renderers.blockentity.PlayerBoneBERenderer;
 import dev.turtywurty.turtyissinking.client.renderers.entity.BossBabyRenderer;
 import dev.turtywurty.turtyissinking.client.renderers.entity.WheelchairRenderer;
 import dev.turtywurty.turtyissinking.client.screens.BackpackScreen;
@@ -37,26 +38,27 @@ public class ClientModEventHandler {
             renderer.addLayer(new BackpackLayer(renderer));
         }
     }
-    
+
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             MenuScreens.register(MenuInit.BACKPACK.get(), (menu, inventory, $) -> new BackpackScreen(menu, inventory));
         });
     }
-    
+
     @SubscribeEvent
     public static void registerEntityRenderers(RegisterRenderers event) {
         event.registerBlockEntityRenderer(BlockEntityInit.BACKPACK.get(), BackpackBERenderer::new);
         event.registerEntityRenderer(EntityInit.BOSS_BABY.get(), BossBabyRenderer::new);
         event.registerEntityRenderer(EntityInit.WHEELCHAIR.get(), WheelchairRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.PLAYER_BONE.get(), PlayerBoneBERenderer::new);
     }
-    
+
     @SubscribeEvent
     public static void registerKeys(RegisterKeyMappingsEvent event) {
         event.register(Keys.INSTANCE.openBackpack);
     }
-    
+
     @SubscribeEvent
     public static void registerLayerDefinitions(RegisterLayerDefinitions event) {
         event.registerLayerDefinition(BackpackModel.LAYER_LOCATION, BackpackModel::createMainLayer);

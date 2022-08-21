@@ -14,7 +14,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Explosion;
@@ -42,23 +41,23 @@ public class ForgeEventHandler {
             TurtyIsSinking.LOGGER.info("Capability attached");
         }
     }
-    
+
     @SubscribeEvent
     public static void breakBlock(BreakEvent event) {
         Hooks.explosiveTouch(event);
     }
-    
+
     @SubscribeEvent
     public static void breakBlockSpeed(BreakSpeed event) {
         Hooks.stoneTouch(event);
     }
-    
+
     @SubscribeEvent
     public static void playerClone(PlayerEvent.Clone event) {
         event.getEntity().getCapability(PlayerBonesCapability.PLAYER_BONES).invalidate();
         TurtyIsSinking.LOGGER.info("Capability invalidated");
     }
-    
+
     @SubscribeEvent
     public static void playerJoined(PlayerLoggedInEvent event) {
         if (!event.getEntity().level.isClientSide) {
@@ -68,53 +67,47 @@ public class ForgeEventHandler {
                     new CSyncPlayerBonesPacket(cap.getSawn().toArray(PlayerBone[]::new))));
         }
     }
-    
+
     @SubscribeEvent
     public static void playerJump(LivingJumpEvent event) {
         if (event.getEntity() instanceof final Player player) {
             final PlayerBones cap = player.getCapability(PlayerBonesCapability.PLAYER_BONES).orElse(null);
             if (cap == null)
                 return;
-            
+
             if (cap.getSawn().contains(PlayerBone.LEFT_LEG) && cap.getSawn().contains(PlayerBone.RIGHT_LEG)) {
                 player.setDeltaMovement(new Vec3(0, -50f, 0));
             }
         }
     }
-
+    
     @SubscribeEvent
     public static void playerTick(PlayerTickEvent event) {
         final Player player = event.player;
         final PlayerBones cap = player.getCapability(PlayerBonesCapability.PLAYER_BONES).orElse(null);
         if (cap == null)
             return;
-        
-        if (cap.getSawn().contains(PlayerBone.LEFT_LEG) || cap.getSawn().contains(PlayerBone.RIGHT_LEG)) {
-            if (player.isOnGround()) {
-                final Vec3 movement = player.getDeltaMovement();
-                if (movement.x() != 0 || movement.z() != 0) {
-                    player.setPos(new Vec3(player.xOld, player.getY(), player.zOld));
-                }
-            }
 
+        final Vec3 movement = player.getDeltaMovement();
+        if (cap.getSawn().contains(PlayerBone.LEFT_LEG) || cap.getSawn().contains(PlayerBone.RIGHT_LEG)) {
+            if (player.isOnGround() && (movement.x() != 0 || movement.z() != 0)) {
+                player.setPos(new Vec3(player.xOld, player.getY(), player.zOld));
+            }
+            
             if (player.isSprinting()) {
                 player.setSprinting(false);
             }
-            
+
             if (player.isSwimming()) {
                 player.setSwimming(false);
             }
         }
-
+        
         if (cap.getSawn().contains(PlayerBone.LEFT_LEG) && cap.getSawn().contains(PlayerBone.RIGHT_LEG)) {
             player.eyeHeight = 1.25f;
-            
-            if (player.getForcedPose() != Pose.STANDING) {
-                player.setForcedPose(Pose.STANDING);
-            }
         }
     }
-    
+
     private static class Hooks {
         private static void explosiveTouch(BreakEvent event) {
             final int explosiveTouchLevel = EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.EXPLOSIVE_TOUCH.get(),
@@ -128,7 +121,7 @@ public class ForgeEventHandler {
                     Explosion.BlockInteraction.BREAK);
             }
         }
-        
+
         private static void stoneTouch(BreakSpeed event) {
             final int stoneTouchLevel = EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.STONE_TOUCH.get(),
                 event.getEntity());
