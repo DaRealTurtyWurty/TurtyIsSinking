@@ -5,6 +5,13 @@
     "enchantment.turtyissinking.stone_touch": "Stone Touch",
     "item.turtyissinking.bonesaw": "Bonesaw",
     "screen.turtyissinking.bonesaw": "Bonesaw",
+    "screen.turtyissinking.quarry": "Quarry",
+    "screen.turtyissinking.quarry.width_decrease": "<",
+    "screen.turtyissinking.quarry.width_increase": ">",
+    "screen.turtyissinking.quarry.width_input": "Width",
+    "screen.turtyissinking.quarry.height_decrease": "<",
+    "screen.turtyissinking.quarry.height_increase": ">",
+    "screen.turtyissinking.quarry.height_input": "Height",
         
     "itemGroup.turtyissinking": "Turty Is Sinking"
 }

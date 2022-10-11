@@ -3,6 +3,7 @@ package dev.turtywurty.turtyissinking.init;
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
 import dev.turtywurty.turtyissinking.blockentities.BackpackBlockEntity;
 import dev.turtywurty.turtyissinking.blockentities.PlayerBoneBlockEntity;
+import dev.turtywurty.turtyissinking.blockentities.QuarryBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,4 +22,7 @@ public final class BlockEntityInit {
             .of(PlayerBoneBlockEntity::new, BlockInit.PLAYER_BODY.get(), BlockInit.PLAYER_LEFT_ARM.get(),
                 BlockInit.PLAYER_LEFT_LEG.get(), BlockInit.PLAYER_RIGHT_ARM.get(), BlockInit.PLAYER_RIGHT_LEG.get())
             .build(null));
+    
+    public static final RegistryObject<BlockEntityType<QuarryBlockEntity>> QUARRY = BLOCK_ENTITIES.register("quarry",
+        () -> BlockEntityType.Builder.of(QuarryBlockEntity::new, BlockInit.QUARRY.get()).build(null));
 }
