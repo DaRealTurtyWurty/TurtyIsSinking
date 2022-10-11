@@ -105,8 +105,14 @@ public class ClientForgeEventHandler {
     @SuppressWarnings("resource")
     @SubscribeEvent
     public static void renderHUD(RenderGuiOverlayEvent.Pre event) {
+        final Player player = Minecraft.getInstance().player;
+        if (player.getMainHandItem().is(ItemInit.CAMERA.get())
+            && !(TurtyIsSinking.MODID + ":camera").equals(event.getOverlay().id().toString())) {
+            event.setCanceled(true);
+            return;
+        }
+        
         if (event.getOverlay().id().equals(HOTBAR)) {
-            final Player player = Minecraft.getInstance().player;
             final PlayerBones cap = player.getCapability(PlayerBonesCapability.PLAYER_BONES).orElse(null);
             if (cap == null)
                 return;
@@ -116,7 +122,6 @@ public class ClientForgeEventHandler {
                 event.setCanceled(true);
             }
         } else if (event.getOverlay().id().equals(ITEM_NAME)) {
-            final Player player = Minecraft.getInstance().player;
             final PlayerBones cap = player.getCapability(PlayerBonesCapability.PLAYER_BONES).orElse(null);
             if (cap == null)
                 return;

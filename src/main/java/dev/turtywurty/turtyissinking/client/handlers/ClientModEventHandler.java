@@ -11,17 +11,22 @@ import dev.turtywurty.turtyissinking.client.renderers.blockentity.PlayerBoneBERe
 import dev.turtywurty.turtyissinking.client.renderers.entity.BossBabyRenderer;
 import dev.turtywurty.turtyissinking.client.renderers.entity.WheelchairRenderer;
 import dev.turtywurty.turtyissinking.client.screens.BackpackScreen;
+import dev.turtywurty.turtyissinking.client.util.RenderingUtils;
 import dev.turtywurty.turtyissinking.init.BlockEntityInit;
 import dev.turtywurty.turtyissinking.init.EntityInit;
+import dev.turtywurty.turtyissinking.init.ItemInit;
 import dev.turtywurty.turtyissinking.init.MenuInit;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent.AddLayers;
 import net.minecraftforge.client.event.EntityRenderersEvent.RegisterLayerDefinitions;
 import net.minecraftforge.client.event.EntityRenderersEvent.RegisterRenderers;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -45,7 +50,7 @@ public class ClientModEventHandler {
             MenuScreens.register(MenuInit.BACKPACK.get(), (menu, inventory, $) -> new BackpackScreen(menu, inventory));
         });
     }
-
+    
     @SubscribeEvent
     public static void registerEntityRenderers(RegisterRenderers event) {
         event.registerBlockEntityRenderer(BlockEntityInit.BACKPACK.get(), BackpackBERenderer::new);
@@ -53,16 +58,36 @@ public class ClientModEventHandler {
         event.registerEntityRenderer(EntityInit.WHEELCHAIR.get(), WheelchairRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityInit.PLAYER_BONE.get(), PlayerBoneBERenderer::new);
     }
-
+    
     @SubscribeEvent
     public static void registerKeys(RegisterKeyMappingsEvent event) {
         event.register(Keys.INSTANCE.openBackpack);
     }
-
+    
     @SubscribeEvent
     public static void registerLayerDefinitions(RegisterLayerDefinitions event) {
         event.registerLayerDefinition(BackpackModel.LAYER_LOCATION, BackpackModel::createMainLayer);
         event.registerLayerDefinition(BossBabyModel.LAYER_LOCATION, BossBabyModel::createBodyLayer);
         event.registerLayerDefinition(WheelchairModel.LAYER_LOCATION, WheelchairModel::createBodyLayer);
     }
+    
+    @SuppressWarnings("resource")
+    @SubscribeEvent
+    public static void registerOverlays(RegisterGuiOverlaysEvent event) {
+        event.registerAboveAll("camera", (gui, poseStack, partialTick, screenWidth, screenHeight) -> {
+            final Player player = Minecraft.getInstance().player;
+            if (player.getMainHandItem().is(ItemInit.CAMERA.get())) {
+                RenderingUtils.renderVignette(screenWidth, screenHeight, 1.25f);
+                
+                RenderingUtils.renderCorners(poseStack, screenWidth, screenHeight, 10, 10, 40, 2, 0xFFFFFFFF);
+                RenderingUtils.renderCorners(poseStack, screenWidth, screenHeight, (int) (screenWidth / 2.5f),
+                    (int) (screenHeight / 2.5f), 20, 2, 0xFFFFFFFF);
+
+                RenderingUtils.renderCrosshair(poseStack, screenWidth / 2, screenHeight / 2, 5, 2, 0xFFFFFFFF);
+                
+                RenderingUtils.renderCircle(poseStack, 20, 20, 20, 255, 0, 0, 1.0f);
+            }
+        });
+    }
+
 }

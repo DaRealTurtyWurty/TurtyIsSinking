@@ -3,6 +3,7 @@ package dev.turtywurty.turtyissinking.init;
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
 import dev.turtywurty.turtyissinking.items.BackpackItem;
 import dev.turtywurty.turtyissinking.items.BonesawItem;
+import dev.turtywurty.turtyissinking.items.CameraItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
@@ -33,6 +34,8 @@ public class ItemInit {
     public static final RegistryObject<BlockItem> PLAYER_BODY = ITEMS.register("player_body",
         () -> new BlockItem(BlockInit.PLAYER_BODY.get(), defaultProps()));
 
+    public static final RegistryObject<CameraItem> CAMERA = ITEMS.register("camera",
+        () -> new CameraItem(defaultProps().stacksTo(1)));
     public static Item.Properties defaultProps() {
         return new Item.Properties().tab(TurtyIsSinking.TAB);
     }
