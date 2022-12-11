@@ -9,16 +9,16 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public abstract class SyncingBlockEntity extends BlockEntity implements TickableBlockEntity {
+public abstract class SyncingBlockEntity extends BlockEntity {
     protected SyncingBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
-
+    
     @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
-
+    
     @Override
     public CompoundTag getUpdateTag() {
         final var update = new CompoundTag();

@@ -3,6 +3,7 @@ package dev.turtywurty.turtyissinking.init;
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
 import dev.turtywurty.turtyissinking.blocks.BackpackBlock;
 import dev.turtywurty.turtyissinking.blocks.ExpOreBlock;
+import dev.turtywurty.turtyissinking.blocks.PianoBlock;
 import dev.turtywurty.turtyissinking.blocks.PlayerBoneBlock;
 import dev.turtywurty.turtyissinking.blocks.QuarryBlock;
 import dev.turtywurty.turtyissinking.client.screens.BonesawScreen.PlayerBone;
@@ -17,13 +18,13 @@ import net.minecraftforge.registries.RegistryObject;
 public class BlockInit {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
         TurtyIsSinking.MODID);
-
+    
     public static final RegistryObject<BackpackBlock> BACKPACK = BLOCKS.register("backpack", () -> new BackpackBlock(
         BlockBehaviour.Properties.of(Material.CLOTH_DECORATION).dynamicShape().noOcclusion().strength(2.5f, 10f)));
-    
+
     public static final RegistryObject<ExpOreBlock> EXP_ORE = BLOCKS.register("exp_ore",
         () -> new ExpOreBlock(BlockBehaviour.Properties.copy(Blocks.COAL_ORE)));
-
+    
     public static final RegistryObject<PlayerBoneBlock> PLAYER_LEFT_ARM = BLOCKS.register("player_left_arm",
         () -> new PlayerBoneBlock(BlockBehaviour.Properties.of(Material.EGG).dynamicShape().noOcclusion(),
             PlayerBone.LEFT_ARM));
@@ -39,7 +40,10 @@ public class BlockInit {
     public static final RegistryObject<PlayerBoneBlock> PLAYER_BODY = BLOCKS.register("player_body",
         () -> new PlayerBoneBlock(BlockBehaviour.Properties.of(Material.EGG).dynamicShape().noOcclusion(),
             PlayerBone.BODY));
-
+    
     public static final RegistryObject<QuarryBlock> QUARRY = BLOCKS.register("quarry", () -> new QuarryBlock(
         BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F)));
+
+    public static final RegistryObject<PianoBlock> PIANO = BLOCKS.register("piano", () -> new PianoBlock(
+        BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(5f).noOcclusion()));
 }
