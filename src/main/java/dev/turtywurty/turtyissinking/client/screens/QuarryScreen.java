@@ -57,23 +57,19 @@ public class QuarryScreen extends Screen {
         this.widthInput = addRenderableWidget(new EditBox(this.font, this.leftPos + 22, this.topPos + 20, 35, 16,
             Component.translatable("screen." + TurtyIsSinking.MODID + ".quarry.width_input")));
 
-        this.widthDecrease = addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 19, 12, 18,
-            Component.translatable("screen." + TurtyIsSinking.MODID + ".quarry.width_decrease"), btn -> {
-            }));
-        
-        this.widthIncrease = addRenderableWidget(new Button(this.leftPos + 57, this.topPos + 19, 12, 18,
-            Component.translatable("screen." + TurtyIsSinking.MODID + ".quarry.width_increase"), btn -> {
-            }));
+        Button widthDecreaseButton = new Button.Builder(Component.translatable("screen." + TurtyIsSinking.MODID + ".quarry.width_decrease"), (btn) -> {}).pos(this.leftPos + 10, this.topPos + 19).size(12, 18).build();
+        this.widthDecrease = addRenderableWidget(widthDecreaseButton);
+
+        Button widthIncreaseButton = new Button.Builder(Component.translatable("screen." + TurtyIsSinking.MODID + ".quarry.width_increase"), (btn) -> {}).pos(this.leftPos + 57, this.topPos + 19).size(12, 18).build();
+        this.widthIncrease = addRenderableWidget(widthIncreaseButton);
 
         this.heightInput = addRenderableWidget(new EditBox(this.font, this.leftPos + 22, this.topPos + 40, 35, 16,
             Component.translatable("screen." + TurtyIsSinking.MODID + ".quarry.height_input")));
 
-        this.heightDecrease = addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 39, 12, 18,
-            Component.translatable("screen." + TurtyIsSinking.MODID + ".quarry.height_decrease"), btn -> {
-            }));
-        
-        this.heightIncrease = addRenderableWidget(new Button(this.leftPos + 57, this.topPos + 39, 12, 18,
-            Component.translatable("screen." + TurtyIsSinking.MODID + ".quarry.height_increase"), btn -> {
-            }));
+        Button heightDecreaseButton = new Button.Builder(Component.translatable("screen." + TurtyIsSinking.MODID + ".quarry.height_decrease"), (btn) -> {}).pos(this.leftPos + 10, this.topPos + 39).size(12, 18).build();
+        this.heightDecrease = addRenderableWidget(heightDecreaseButton);
+
+        Button heightIncreaseButton = new Button.Builder(Component.translatable("screen." + TurtyIsSinking.MODID + ".quarry.height_increase"), (btn) -> {}).pos(this.leftPos + 57, this.topPos + 39).size(12, 18).build();
+        this.heightIncrease = addRenderableWidget(heightIncreaseButton);
     }
 }

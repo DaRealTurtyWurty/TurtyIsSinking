@@ -1,8 +1,7 @@
 package dev.turtywurty.turtyissinking.client.renderers.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
-
+import com.mojang.math.Axis;
 import dev.turtywurty.turtyissinking.blockentities.BackpackBlockEntity;
 import dev.turtywurty.turtyissinking.blocks.BackpackBlock;
 import dev.turtywurty.turtyissinking.client.Materials;
@@ -23,12 +22,12 @@ public class BackpackBERenderer implements BlockEntityRenderer<BackpackBlockEnti
     @Override
     public void render(BackpackBlockEntity blockEntity, float partialTicks, PoseStack poseStack,
         MultiBufferSource buffer, int packedLight, int packedOverlay) {
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(180f));
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(180f));
+        poseStack.mulPose(Axis.XP.rotationDegrees(180f));
+        poseStack.mulPose(Axis.YP.rotationDegrees(180f));
         poseStack.translate(-0.5f, -1.25f, 0.625f);
 
         final Direction facing = blockEntity.getBlockState().getValue(BackpackBlock.FACING);
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(facing.toYRot() - 180));
+        poseStack.mulPose(Axis.YP.rotationDegrees(facing.toYRot() - 180));
 
         poseStack.translate(getX(facing), 0f, getZ(facing));
 

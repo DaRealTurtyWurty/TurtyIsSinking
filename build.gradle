@@ -21,7 +21,7 @@ archivesBaseName = 'turtyissinking'
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-    mappings channel: 'parchment', version: '2022.08.10-1.19.2'
+    mappings channel: 'parchment', version: '2023.03.12-1.19.3'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -99,7 +99,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.2-43.0.2'
+    minecraft 'net.minecraftforge:forge:1.19.3-44.1.23'
     
     implementation 'de.sfuhrm:radiobrowser4j:2.2.3'
 }

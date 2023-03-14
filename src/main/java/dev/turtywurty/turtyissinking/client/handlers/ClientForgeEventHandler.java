@@ -210,7 +210,7 @@ public class ClientForgeEventHandler {
                                 final VertexConsumer consumer = new SheetedDecalTextureGenerator(
                                     Minecraft.getInstance().renderBuffers().crumblingBufferSource().getBuffer(
                                         ModelBakery.DESTROY_TYPES.get(progress)),
-                                    pose.pose(), pose.normal());
+                                    pose.pose(), pose.normal(), 1.0f);
                                 final ModelData modelData = player.level.getModelDataManager().getAt(blockPos);
                                 Minecraft.getInstance().getBlockRenderer().renderBreakingTexture(
                                     player.level.getBlockState(blockPos), blockPos, player.level, poseStack, consumer,

@@ -16,6 +16,7 @@ import dev.turtywurty.turtyissinking.init.BlockEntityInit;
 import dev.turtywurty.turtyissinking.init.EntityInit;
 import dev.turtywurty.turtyissinking.init.ItemInit;
 import dev.turtywurty.turtyissinking.init.MenuInit;
+import dev.turtywurty.turtyissinking.menus.BackpackMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.PlayerModel;
@@ -47,7 +48,7 @@ public class ClientModEventHandler {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            MenuScreens.register(MenuInit.BACKPACK.get(), (menu, inventory, $) -> new BackpackScreen(menu, inventory));
+            MenuScreens.<BackpackMenu, BackpackScreen>register(MenuInit.BACKPACK.get(), (menu, inventory, $) -> new BackpackScreen(menu, inventory));
         });
     }
     

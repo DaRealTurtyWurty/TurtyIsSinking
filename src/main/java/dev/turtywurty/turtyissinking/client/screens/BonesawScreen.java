@@ -114,26 +114,26 @@ public class BonesawScreen extends Screen {
             this.width = bone == PlayerBone.HEAD || bone == PlayerBone.BODY ? 16 : 8;
             this.height = bone == PlayerBone.HEAD ? 16 : 24;
             
-            this.x += screen.imageWidth / 2 - this.width / 2;
-            this.y += screen.imageHeight / 2 - this.height / 2;
+            setX(getX() + screen.imageWidth / 2 - this.width / 2);
+            setY(getY() + screen.imageHeight / 2 - this.height / 2);
             
             switch (bone) {
                 case HEAD:
-                    this.y -= this.height + 4;
+                    setY(getY() - this.height + 4);
                     break;
                 case RIGHT_LEG:
-                    this.x += this.width / 2;
-                    this.y += this.height;
+                    setX(getX() + this.width / 2);
+                    setY(getY() + this.height);
                     break;
                 case LEFT_LEG:
-                    this.x -= this.width / 2;
-                    this.y += this.height;
+                    setX(getX() - this.width / 2);
+                    setY(getY() + this.height);
                     break;
                 case LEFT_ARM:
-                    this.x -= this.width + 4;
+                    setX(getX() - this.width + 4);
                     break;
                 case RIGHT_ARM:
-                    this.x += this.width + 4;
+                    setX(getX() + this.width + 4);
                     break;
                 default:
                     break;
@@ -158,7 +158,12 @@ public class BonesawScreen extends Screen {
             
             return false;
         }
-        
+
+        @Override
+        protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+            defaultButtonNarrationText(pNarrationElementOutput);
+        }
+
         @Override
         public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
             RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
@@ -175,12 +180,7 @@ public class BonesawScreen extends Screen {
             }
             
             RenderSystem.setShaderColor(red, green, blue, 1.0f);
-            blit(pPoseStack, this.x, this.y, 0, 0, this.width, this.height, this.width, this.height);
-        }
-        
-        @Override
-        public void updateNarration(NarrationElementOutput pNarrationElementOutput) {
-            defaultButtonNarrationText(pNarrationElementOutput);
+            blit(pPoseStack, getX(), getY(), 0, 0, this.width, this.height, this.width, this.height);
         }
     }
 }

@@ -1,8 +1,7 @@
 package dev.turtywurty.turtyissinking.client.layers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
-
+import com.mojang.math.Axis;
 import dev.turtywurty.turtyissinking.client.Materials;
 import dev.turtywurty.turtyissinking.client.models.BackpackModel;
 import dev.turtywurty.turtyissinking.init.ItemInit;
@@ -16,6 +15,8 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.EquipmentSlot;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public class BackpackLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
     private final BackpackModel backpack;
@@ -31,7 +32,7 @@ public class BackpackLayer extends RenderLayer<AbstractClientPlayer, PlayerModel
         float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
         float headPitch) {
         if (player.getItemBySlot(EquipmentSlot.CHEST).getItem() == ItemInit.BACKPACK.get()) {
-            poseStack.mulPose(Vector3f.YP.rotationDegrees(180f));
+            poseStack.mulPose(Axis.YP.rotationDegrees(180f));
             copyPlayerTransform();
 
             this.backpack.renderToBuffer(poseStack, Materials.BACKPACK_LOCATION.buffer(buffer, RenderType::entitySolid),

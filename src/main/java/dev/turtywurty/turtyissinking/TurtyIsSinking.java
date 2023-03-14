@@ -20,12 +20,16 @@ public class TurtyIsSinking {
     public static final String MODID = "turtyissinking";
     public static final Logger LOGGER = LoggerFactory.getLogger(TurtyIsSinking.class);
 
-    public static final CreativeModeTab TAB = new CreativeModeTab(TurtyIsSinking.MODID) {
-        @Override
-        public ItemStack makeIcon() {
-            return ItemInit.BACKPACK.get().getDefaultInstance();
-        }
-    };
+    private static CreativeModeTab TAB;
+
+    public static CreativeModeTab getTab() {
+        return TAB;
+    }
+
+    public static void setTab(CreativeModeTab tab) {
+        if (TAB == null && tab != null)
+            TAB = tab;
+    }
     
     public TurtyIsSinking() {
         final IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();

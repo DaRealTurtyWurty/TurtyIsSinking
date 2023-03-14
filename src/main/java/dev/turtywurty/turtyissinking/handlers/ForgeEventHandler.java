@@ -18,6 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.ExplosionDamageCalculator;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags.Blocks;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -115,10 +116,10 @@ public class ForgeEventHandler {
             if (!event.getPlayer().isCreative() && explosiveTouchLevel > 0 && !event.getLevel().isClientSide()
                 && ThreadLocalRandom.current().nextInt(2, 10 / explosiveTouchLevel) == 2) {
                 final ServerLevel level = (ServerLevel) event.getLevel();
-                level.explode(event.getPlayer(), DamageSource.explosion(event.getPlayer()),
+                level.explode(event.getPlayer(), DamageSource.explosion(null),
                     new ExplosionDamageCalculator(), event.getPos().getX(), event.getPos().getY(),
                     event.getPos().getZ(), ThreadLocalRandom.current().nextFloat(5f, 15f), false,
-                    Explosion.BlockInteraction.BREAK);
+                    Level.ExplosionInteraction.BLOCK);
             }
         }
 

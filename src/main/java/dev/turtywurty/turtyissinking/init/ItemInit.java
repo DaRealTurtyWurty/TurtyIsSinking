@@ -12,6 +12,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
         TurtyIsSinking.MODID);
@@ -49,6 +53,6 @@ public class ItemInit {
         () -> new BlockItem(BlockInit.PIANO.get(), defaultProps()));
     
     public static Item.Properties defaultProps() {
-        return new Item.Properties().tab(TurtyIsSinking.TAB);
+        return new Item.Properties();
     }
 }

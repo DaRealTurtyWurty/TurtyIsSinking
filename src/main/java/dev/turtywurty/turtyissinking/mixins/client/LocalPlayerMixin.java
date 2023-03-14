@@ -20,9 +20,8 @@ public abstract class LocalPlayerMixin extends Player {
     @Shadow
     private boolean crouching;
 
-    private LocalPlayerMixin(Level pLevel, BlockPos pPos, float pYRot, GameProfile pGameProfile,
-        ProfilePublicKey pProfilePublicKey) {
-        super(pLevel, pPos, pYRot, pGameProfile, pProfilePublicKey);
+    private LocalPlayerMixin(Level pLevel, BlockPos pPos, float pYRot, GameProfile pGameProfile) {
+        super(pLevel, pPos, pYRot, pGameProfile);
     }
     
     @Override

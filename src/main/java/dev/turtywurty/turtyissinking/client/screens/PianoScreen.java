@@ -210,13 +210,13 @@ public class PianoScreen extends Screen {
 
             final boolean pressed = isKeyDown(this.note.keyCode()) || isClicking(pMouseX, pMouseY);
 
-            blit(pPoseStack, this.x, this.y, isWhite(this.note) ? 176 : 192, pressed ? this.height : 0, this.width,
+            blit(pPoseStack, this.getX(), this.getY(), isWhite(this.note) ? 176 : 192, pressed ? this.height : 0, this.width,
                 this.height);
 
             if (isWhite(this.note)) {
                 this.screen.font.draw(pPoseStack, this.note.name(),
-                    this.x + this.width / 2 - this.screen.font.width(this.note.name()) / 2,
-                    this.y + this.height - this.screen.font.lineHeight, 0x202020);
+                    this.getX() + this.width / 2 - this.screen.font.width(this.note.name()) / 2,
+                    this.getY() + this.height - this.screen.font.lineHeight, 0x202020);
             }
         }
 
