@@ -51,6 +51,9 @@ public class ItemInit {
 
     public static final RegistryObject<BlockItem> PIANO = ITEMS.register("piano",
         () -> new BlockItem(BlockInit.PIANO.get(), defaultProps()));
+
+    public static final RegistryObject<BlockItem> CLAYMORE = ITEMS.register("claymore",
+        () -> new BlockItem(BlockInit.CLAYMORE.get(), defaultProps()));
     
     public static Item.Properties defaultProps() {
         return new Item.Properties();

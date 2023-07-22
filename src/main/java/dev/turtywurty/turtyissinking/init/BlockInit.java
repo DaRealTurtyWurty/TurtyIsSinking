@@ -1,11 +1,7 @@
 package dev.turtywurty.turtyissinking.init;
 
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
-import dev.turtywurty.turtyissinking.blocks.BackpackBlock;
-import dev.turtywurty.turtyissinking.blocks.ExpOreBlock;
-import dev.turtywurty.turtyissinking.blocks.PianoBlock;
-import dev.turtywurty.turtyissinking.blocks.PlayerBoneBlock;
-import dev.turtywurty.turtyissinking.blocks.QuarryBlock;
+import dev.turtywurty.turtyissinking.blocks.*;
 import dev.turtywurty.turtyissinking.client.screens.BonesawScreen.PlayerBone;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -46,4 +42,7 @@ public class BlockInit {
 
     public static final RegistryObject<PianoBlock> PIANO = BLOCKS.register("piano", () -> new PianoBlock(
         BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(5f).noOcclusion()));
+
+    public static final RegistryObject<ClaymoreBlock> CLAYMORE = BLOCKS.register("claymore", () -> new ClaymoreBlock(
+        BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F)));
 }

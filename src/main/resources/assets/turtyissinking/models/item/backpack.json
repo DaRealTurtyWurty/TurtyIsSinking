@@ -2,7 +2,7 @@
     "parent": "builtin/entity",
     "gui_light": "front",
     "textures": {
-        "particle": "turtyissinking:entities/backpack"
+        "particle": "turtyissinking:entity/backpack"
     },
     "display": {
         "thirdperson_righthand": {

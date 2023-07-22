@@ -3,6 +3,7 @@ package dev.turtywurty.turtyissinking.client.models;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
+import dev.turtywurty.turtyissinking.TurtyIsSinking;
 import dev.turtywurty.turtyissinking.entities.BossBaby;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -17,7 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class BossBabyModel extends EntityModel<BossBaby> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-        new ResourceLocation("modid", "boss_baby"), "main");
+        new ResourceLocation(TurtyIsSinking.MODID, "boss_baby"), "main");
     
     private final ModelPart body;
     

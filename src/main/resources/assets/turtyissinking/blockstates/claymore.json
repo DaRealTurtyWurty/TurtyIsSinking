@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "turtyissinking:block/claymore" },
+    "facing=east": { "model": "turtyissinking:block/claymore", "y": 90 },
+    "facing=south": { "model": "turtyissinking:block/claymore", "y": 180 },
+    "facing=west": { "model": "turtyissinking:block/claymore", "y": 270 }
+  }
+}

@@ -12,6 +12,8 @@
     "screen.turtyissinking.quarry.height_decrease": "<",
     "screen.turtyissinking.quarry.height_increase": ">",
     "screen.turtyissinking.quarry.height_input": "Height",
+    "entity.turtyissinking.wheelchair": "Wheelchair",
+    "block.turtyissinking.claymore": "Claymore",
         
     "itemGroup.turtyissinking": "Turty Is Sinking"
 }

@@ -1,10 +1,7 @@
 package dev.turtywurty.turtyissinking.init;
 
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
-import dev.turtywurty.turtyissinking.blockentities.BackpackBlockEntity;
-import dev.turtywurty.turtyissinking.blockentities.PianoBlockEntity;
-import dev.turtywurty.turtyissinking.blockentities.PlayerBoneBlockEntity;
-import dev.turtywurty.turtyissinking.blockentities.QuarryBlockEntity;
+import dev.turtywurty.turtyissinking.blockentities.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -29,4 +26,7 @@ public final class BlockEntityInit {
 
     public static final RegistryObject<BlockEntityType<PianoBlockEntity>> PIANO = BLOCK_ENTITIES.register("piano",
         () -> BlockEntityType.Builder.of(PianoBlockEntity::new, BlockInit.PIANO.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<ClaymoreBlockEntity>> CLAYMORE = BLOCK_ENTITIES.register("claymore",
+        () -> BlockEntityType.Builder.of(ClaymoreBlockEntity::new, BlockInit.CLAYMORE.get()).build(null));
 }

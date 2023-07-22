@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class BossBabyRenderer extends MobRenderer<BossBaby, BossBabyModel> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(TurtyIsSinking.MODID,
-        "textures/entities/boss_baby.png");
+        "textures/entity/boss_baby.png");
     
     public BossBabyRenderer(EntityRendererProvider.Context ctx) {
         super(ctx, new BossBabyModel(ctx.bakeLayer(BossBabyModel.LAYER_LOCATION)), 0.4f);

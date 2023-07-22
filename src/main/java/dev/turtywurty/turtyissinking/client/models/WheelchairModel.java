@@ -19,6 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 public class WheelchairModel<Entity extends Wheelchair> extends EntityModel<Entity> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
         new ResourceLocation(TurtyIsSinking.MODID, "wheelchair"), "main");
+
     private final ModelPart frame;
     private final ModelPart seat;
     private final ModelPart feet;

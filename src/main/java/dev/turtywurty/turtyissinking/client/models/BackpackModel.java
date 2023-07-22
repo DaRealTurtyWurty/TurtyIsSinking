@@ -19,6 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 public class BackpackModel extends Model {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
         new ResourceLocation(TurtyIsSinking.MODID, "backpack"), "main");
+
     public final ModelPart backpack;
 
     public BackpackModel(ModelPart root) {
