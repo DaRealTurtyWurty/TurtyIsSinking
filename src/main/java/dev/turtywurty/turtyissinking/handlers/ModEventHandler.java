@@ -5,10 +5,10 @@ import dev.turtywurty.turtyissinking.capabilities.playerbones.PlayerBones;
 import dev.turtywurty.turtyissinking.init.EntityInit;
 import dev.turtywurty.turtyissinking.init.ItemInit;
 import dev.turtywurty.turtyissinking.networking.PacketHandler;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -47,16 +47,17 @@ public class ModEventHandler {
 
         private static void registerCaps(RegisterCapabilitiesEvent event) {
             event.register(PlayerBones.class);
-            TurtyIsSinking.LOGGER.info("Capability registered");
+            TurtyIsSinking.LOGGER.info("Capabilities registered!");
         }
     }
 
     @SubscribeEvent
     public static void registerCreativeTabs(CreativeModeTabEvent.Register event) {
-        TurtyIsSinking.setTab(
-                event.registerCreativeModeTab(new ResourceLocation(TurtyIsSinking.MODID, "tab"), (builder) -> {
-                    builder.icon(() -> ItemInit.BONESAW.get().getDefaultInstance());
-                }));
+        TurtyIsSinking.setTab(event.registerCreativeModeTab(
+                new ResourceLocation(TurtyIsSinking.MODID, "tab"),
+                builder ->
+                        builder.icon(() -> ItemInit.THIGH_HIGHS.get().getDefaultInstance())
+                        .title(Component.translatable("itemGroup." + TurtyIsSinking.MODID))));
     }
 
     @SubscribeEvent

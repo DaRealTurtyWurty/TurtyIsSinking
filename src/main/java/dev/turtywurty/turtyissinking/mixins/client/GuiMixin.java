@@ -16,7 +16,6 @@ import net.minecraft.world.entity.player.Player;
 
 @Mixin(Gui.class)
 public class GuiMixin {
-    @SuppressWarnings("resource")
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Options;attackIndicator()Lnet/minecraft/client/OptionInstance;"), method = "renderCrosshair", cancellable = true)
     private void turtyissinking$renderCrosshair(PoseStack pPoseStack, CallbackInfo callback) {
         final Player player = Minecraft.getInstance().player;

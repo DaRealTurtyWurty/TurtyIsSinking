@@ -36,8 +36,7 @@ public class CSyncPlayerBonesPacket {
     public void encode(FriendlyByteBuf buf) {
         buf.writeUtf(String.join("|", Stream.of(this.bones).map(PlayerBone::name).toArray(String[]::new)));
     }
-    
-    @SuppressWarnings("resource")
+
     public static void handle(CSyncPlayerBonesPacket pkt, Supplier<NetworkEvent.Context> context) {
         context.get().enqueueWork(() -> {
             final Player player = Minecraft.getInstance().player;

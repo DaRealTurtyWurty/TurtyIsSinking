@@ -15,10 +15,10 @@ public final class EntityInit {
         TurtyIsSinking.MODID);
 
     public static final RegistryObject<EntityType<BossBaby>> BOSS_BABY = ENTITIES.register("boss_baby",
-        () -> EntityType.Builder.of(BossBaby::new, MobCategory.AMBIENT).sized(.55f, 0.87f)
+        () -> EntityType.Builder.<BossBaby>of(BossBaby::new, MobCategory.AMBIENT).sized(.55f, 0.87f)
             .build(new ResourceLocation(TurtyIsSinking.MODID, "boss_baby").toString()));
 
     public static final RegistryObject<EntityType<Wheelchair>> WHEELCHAIR = ENTITIES.register("wheelchair",
-        () -> EntityType.Builder.of(Wheelchair::new, MobCategory.MISC).sized(1f, 1.5f)
+        () -> EntityType.Builder.<Wheelchair>of(Wheelchair::new, MobCategory.MISC).sized(1f, 1.5f)
             .build(new ResourceLocation(TurtyIsSinking.MODID, "wheelchair").toString()));
 }

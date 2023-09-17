@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "turtyissinking:block/piano" },
+    "facing=east": { "model": "turtyissinking:block/piano", "y": 90 },
+    "facing=south": { "model": "turtyissinking:block/piano", "y": 180 },
+    "facing=west": { "model": "turtyissinking:block/piano", "y": 270 }
+  }
+}

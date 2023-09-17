@@ -1,16 +1,14 @@
 package dev.turtywurty.turtyissinking.client.util;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat;
-
+import com.mojang.blaze3d.vertex.*;
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.ResourceLocation;
 
 public final class RenderingUtils {
@@ -84,5 +82,34 @@ public final class RenderingUtils {
         RenderSystem.enableDepthTest();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.defaultBlendFunc();
+    }
+
+    public static void drawGradientRect(int x, int y, int width, int height, int startColor, int endColor) {
+        BufferBuilder buffer = Tesselator.getInstance().getBuilder();
+        RenderSystem.disableDepthTest();
+        RenderSystem.disableTexture();
+        RenderSystem.disableBlend();
+
+        float startAlpha = (float)(startColor >> 24 & 255) / 255.0F;
+        float startRed = (float)(startColor >> 16 & 255) / 255.0F;
+        float startGreen = (float)(startColor >> 8 & 255) / 255.0F;
+        float startBlue = (float)(startColor & 255) / 255.0F;
+
+        float endAlpha = (float)(endColor >> 24 & 255) / 255.0F;
+        float endRed = (float)(endColor >> 16 & 255) / 255.0F;
+        float endGreen = (float)(endColor >> 8 & 255) / 255.0F;
+        float endBlue = (float)(endColor & 255) / 255.0F;
+
+        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
+        buffer.vertex((double)x + (double)width, y, 0.0D).color(endRed, endGreen, endBlue, endAlpha).endVertex();
+        buffer.vertex(x, y, 0.0D).color(startRed, startGreen, startBlue, startAlpha).endVertex();
+        buffer.vertex(x, (double)y + (double)height, 0.0D).color(startRed, startGreen, startBlue, startAlpha).endVertex();
+        buffer.vertex((double)x + (double)width, (double)y + (double)height, 0.0D).color(endRed, endGreen, endBlue, endAlpha).endVertex();
+        BufferUploader.drawWithShader(buffer.end());
+
+        RenderSystem.enableBlend();
+        RenderSystem.enableTexture();
+        RenderSystem.enableDepthTest();
     }
 }

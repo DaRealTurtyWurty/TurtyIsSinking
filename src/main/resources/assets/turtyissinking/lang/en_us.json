@@ -14,6 +14,26 @@
     "screen.turtyissinking.quarry.height_input": "Height",
     "entity.turtyissinking.wheelchair": "Wheelchair",
     "block.turtyissinking.claymore": "Claymore",
-        
-    "itemGroup.turtyissinking": "Turty Is Sinking"
+    "block.turtyissinking.exp_ore": "Experience Ore",
+    "block.turtyissinking.player_left_arm": "Player Left Arm",
+    "block.turtyissinking.player_right_arm": "Player Right Arm",
+    "block.turtyissinking.player_left_leg": "Player Left Leg",
+    "block.turtyissinking.player_right_leg": "Player Right Leg",
+    "block.turtyissinking.player_body": "Player Body",
+    "block.turtyissinking.quarry": "Quarry",
+    "item.turtyissinking.sledgehammer": "Sledgehammer",
+    "block.turtyissinking.piano": "Piano",
+    "item.turtyissinking.thigh_highs": "Thigh Highs",
+    "screen.turtyissinking.view_picture":  "View Picture",
+    "button.turtyissinking.view_picture.cancel": "Cancel",
+    "button.turtyissinking.view_picture.save": "Save",
+    "message.turtyissinking.view_picture.save_failed": "Failed to save picture",
+    "message.turtyissinking.view_picture.save_successful": "Saved picture",
+    "button.turtyissinking.edit_picture.back": "Back",
+    "item.turtyissinking.camera": "Camera",
+    "item.turtyissinking.wheelchair": "Wheelchair",
+    "itemGroup.turtyissinking": "Turty is Sinking",
+    "item.turtyissinking.nitro_canister": "Nitro Canister",
+    "container.turtyissinking.wheelchair": "Wheelchair",
+    "tooltip.turtyissinking.nitro_canister": "Nitro"
 }

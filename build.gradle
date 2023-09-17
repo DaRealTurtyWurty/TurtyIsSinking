@@ -31,7 +31,7 @@ minecraft {
             property 'mixin.env.refMapRemappingFile', "${project.projectDir}/build/createSrgToMcp/output.srg"
             workingDirectory project.file('run')
 		    arg "-mixin.config="+archivesBaseName+".mixins.json"
-		    arg "-Dmixin.debug.export=true"
+		    arg "-mixin.debug.export=true"
 
             property 'forge.enabledGameTestNamespaces', archivesBaseName
 
@@ -100,8 +100,6 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.19.3-44.1.23'
-    
-    implementation 'de.sfuhrm:radiobrowser4j:2.2.3'
 }
 
 jar {
@@ -114,7 +112,7 @@ jar {
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "TurtyWurty",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-		    "MixinConfigs": archivesBaseName + ".mixins.json"
+		        "MixinConfigs": archivesBaseName + ".mixins.json"
         ])
     }
 }

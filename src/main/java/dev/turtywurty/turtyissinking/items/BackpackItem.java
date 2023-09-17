@@ -3,6 +3,7 @@ package dev.turtywurty.turtyissinking.items;
 import java.util.List;
 import java.util.function.Consumer;
 
+import net.minecraft.world.item.Wearable;
 import org.jetbrains.annotations.Nullable;
 
 import dev.turtywurty.turtyissinking.client.renderers.bewlr.BackpackItemRenderer;
@@ -26,7 +27,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class BackpackItem extends BlockItem {
+public class BackpackItem extends BlockItem implements Wearable {
     public BackpackItem(Properties properties) {
         super(BlockInit.BACKPACK.get(), properties);
     }

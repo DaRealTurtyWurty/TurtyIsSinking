@@ -1,10 +1,7 @@
 package dev.turtywurty.turtyissinking.init;
 
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
-import dev.turtywurty.turtyissinking.items.BackpackItem;
-import dev.turtywurty.turtyissinking.items.BonesawItem;
-import dev.turtywurty.turtyissinking.items.CameraItem;
-import dev.turtywurty.turtyissinking.items.SledgehammerItem;
+import dev.turtywurty.turtyissinking.items.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
@@ -54,6 +51,15 @@ public class ItemInit {
 
     public static final RegistryObject<BlockItem> CLAYMORE = ITEMS.register("claymore",
         () -> new BlockItem(BlockInit.CLAYMORE.get(), defaultProps()));
+
+    public static final RegistryObject<ThighHighsItem> THIGH_HIGHS = ITEMS.register("thigh_highs",
+        () -> new ThighHighsItem(defaultProps().stacksTo(1)));
+
+    public static final RegistryObject<WheelchairItem> WHEELCHAIR = ITEMS.register("wheelchair",
+        () -> new WheelchairItem(defaultProps().stacksTo(1)));
+
+    public static final RegistryObject<NitroCanisterItem> NITRO_CANISTER = ITEMS.register("nitro_canister",
+        () -> new NitroCanisterItem(defaultProps()));
     
     public static Item.Properties defaultProps() {
         return new Item.Properties();

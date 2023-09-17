@@ -1,5 +1,7 @@
 package dev.turtywurty.turtyissinking.mixins;
 
+import net.minecraftforge.common.util.LazyOptional;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 
 import dev.turtywurty.turtyissinking.capabilities.playerbones.PlayerBones;
@@ -18,24 +20,28 @@ public class InventoryMenuMixin extends Slot {
     }
     
     @Override
-    public boolean mayPickup(Player pPlayer) {
+    public boolean mayPickup(@NotNull Player pPlayer) {
         final Player player = ((Inventory) this.container).player;
-        final PlayerBones cap = player.getCapability(PlayerBonesCapability.PLAYER_BONES).orElse(null);
-        if (cap == null)
-            return super.mayPickup(player);
-        final boolean isAmputated = cap.getSawn().contains(PlayerBone.LEFT_ARM)
-            || cap.getSawn().contains(PlayerBone.RIGHT_ARM);
-        return !isAmputated && super.mayPickup(player);
+        final LazyOptional<PlayerBones> cap = player.getCapability(PlayerBonesCapability.PLAYER_BONES);
+        if(!cap.isPresent())
+            return super.mayPickup(pPlayer);
+
+        PlayerBones bones = cap.orElse(null);
+        final boolean isAmputated = bones.getSawn().contains(PlayerBone.LEFT_ARM)
+            || bones.getSawn().contains(PlayerBone.RIGHT_ARM);
+        return !isAmputated && super.mayPickup(pPlayer);
     }
 
     @Override
-    public boolean mayPlace(ItemStack pStack) {
+    public boolean mayPlace(@NotNull ItemStack pStack) {
         final Player player = ((Inventory) this.container).player;
-        final PlayerBones cap = player.getCapability(PlayerBonesCapability.PLAYER_BONES).orElse(null);
-        if (cap == null)
-            return super.allowModification(player);
-        final boolean isAmputated = cap.getSawn().contains(PlayerBone.LEFT_ARM)
-            || cap.getSawn().contains(PlayerBone.RIGHT_ARM);
-        return !isAmputated && super.allowModification(player);
+        final LazyOptional<PlayerBones> cap = player.getCapability(PlayerBonesCapability.PLAYER_BONES);
+        if(!cap.isPresent())
+            return super.mayPlace(pStack);
+
+        PlayerBones bones = cap.orElse(null);
+        final boolean isAmputated = bones.getSawn().contains(PlayerBone.LEFT_ARM)
+            || bones.getSawn().contains(PlayerBone.RIGHT_ARM);
+        return !isAmputated && super.mayPlace(pStack);
     }
 }

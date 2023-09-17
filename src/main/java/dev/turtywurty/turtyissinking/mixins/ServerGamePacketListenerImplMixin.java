@@ -17,7 +17,7 @@ import net.minecraft.server.network.ServerGamePacketListenerImpl;
 @Mixin(ServerGamePacketListenerImpl.class)
 public class ServerGamePacketListenerImplMixin {
     @Shadow
-    private ServerPlayer player;
+    public ServerPlayer player;
 
     //@formatter:off
     @Inject(
@@ -30,7 +30,6 @@ public class ServerGamePacketListenerImplMixin {
     )
     //@formatter:on
     private void turtyissinking$handlePlayerAction(ServerboundPlayerActionPacket pPacket, CallbackInfo info) {
-        System.out.println("hi");
         if (pPacket.getAction() == Action.SWAP_ITEM_WITH_OFFHAND) {
             final PlayerBones cap = this.player.getCapability(PlayerBonesCapability.PLAYER_BONES).orElse(null);
             if (cap == null)

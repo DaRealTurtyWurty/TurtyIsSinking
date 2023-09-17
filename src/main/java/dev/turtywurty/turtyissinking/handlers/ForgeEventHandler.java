@@ -1,7 +1,5 @@
 package dev.turtywurty.turtyissinking.handlers;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
 import dev.turtywurty.turtyissinking.capabilities.playerbones.PlayerBones;
 import dev.turtywurty.turtyissinking.capabilities.playerbones.PlayerBonesCapability;
@@ -15,8 +13,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -24,6 +22,7 @@ import net.minecraftforge.common.Tags.Blocks;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
@@ -33,14 +32,18 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.network.PacketDistributor;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 @Mod.EventBusSubscriber(modid = TurtyIsSinking.MODID, bus = Bus.FORGE)
 public class ForgeEventHandler {
     @SubscribeEvent
-    public static void attachCaps(AttachCapabilitiesEvent<Entity> event) {
-        if (event.getObject() instanceof Player) {
-            PlayerBonesProvider.attach(event);
-            TurtyIsSinking.LOGGER.info("Capability attached");
-        }
+    public static void attachEntityCaps(AttachCapabilitiesEvent<Entity> event) {
+        PlayerBonesProvider.attach(event);
+    }
+
+    @SubscribeEvent
+    public static void attachItemCaps(AttachCapabilitiesEvent<ItemStack> event) {
+
     }
 
     @SubscribeEvent

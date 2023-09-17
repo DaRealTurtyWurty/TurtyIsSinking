@@ -81,9 +81,9 @@ public class BackpackBlock extends Block implements EntityBlock {
         Player player) {
         final ItemStack superStack = super.getCloneItemStack(state, target, level, pos, player);
         if (level.getBlockEntity(pos) instanceof final BackpackBlockEntity backpack) {
-            superStack.getOrCreateTag().put("Inventory", backpack.getInventory().serializeNBT());
+            superStack.getOrCreateTag().put("inventory", backpack.getInventory().serializeNBT());
         } else {
-            superStack.getOrCreateTag().put("Inventory", new ItemStackHandler(0).serializeNBT());
+            superStack.getOrCreateTag().put("inventory", new ItemStackHandler(0).serializeNBT());
         }
 
         return superStack;
@@ -94,7 +94,7 @@ public class BackpackBlock extends Block implements EntityBlock {
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         final BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         if (blockEntity instanceof final BackpackBlockEntity backpack) {
-            builder = builder.withDynamicDrop(new ResourceLocation("Inventory"), (ctx, stack) -> {
+            builder = builder.withDynamicDrop(new ResourceLocation("contents"), (ctx, stack) -> {
                 for (int index = 0; index < backpack.getInventory().getSlots(); index++) {
                     stack.accept(backpack.getInventory().getStackInSlot(index));
                 }
@@ -149,7 +149,7 @@ public class BackpackBlock extends Block implements EntityBlock {
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (level.getBlockEntity(pos) instanceof final BackpackBlockEntity backpack && !level.isClientSide) {
             final ItemStack stack = asItem().getDefaultInstance();
-            stack.getOrCreateTag().put("Inventory", backpack.getInventory().serializeNBT());
+            stack.getOrCreateTag().put("inventory", backpack.getInventory().serializeNBT());
 
             final var itemEntity = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
                 stack);
@@ -163,8 +163,8 @@ public class BackpackBlock extends Block implements EntityBlock {
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         if (level.getBlockEntity(pos) instanceof final BackpackBlockEntity backpack
-            && stack.getOrCreateTag().contains("Inventory")) {
-            backpack.getInventory().deserializeNBT(stack.getTag().getCompound("Inventory"));
+            && stack.getOrCreateTag().contains("inventory")) {
+            backpack.getInventory().deserializeNBT(stack.getTag().getCompound("inventory"));
         }
     }
 

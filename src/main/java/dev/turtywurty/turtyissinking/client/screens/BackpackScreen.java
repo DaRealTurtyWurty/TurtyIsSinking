@@ -14,9 +14,10 @@ import net.minecraft.world.entity.player.Inventory;
 public class BackpackScreen extends AbstractContainerScreen<BackpackMenu> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(TurtyIsSinking.MODID,
         "textures/gui/backpack.png");
+    private static final Component TITLE = Component.translatable("container." + TurtyIsSinking.MODID + ".backpack");
     
     public BackpackScreen(BackpackMenu menu, Inventory inventory) {
-        super(menu, inventory, Component.translatable("container." + TurtyIsSinking.MODID + ".backpack"));
+        super(menu, inventory, TITLE);
         this.imageWidth = 176;
         this.imageHeight = 166;
         this.leftPos = 0;

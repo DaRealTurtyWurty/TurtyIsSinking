@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class BossBaby extends PathfinderMob {
-    public BossBaby(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
+    public BossBaby(EntityType<BossBaby> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 

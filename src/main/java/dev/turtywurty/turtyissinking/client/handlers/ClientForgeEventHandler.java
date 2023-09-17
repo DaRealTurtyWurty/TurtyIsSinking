@@ -11,13 +11,17 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
 import dev.turtywurty.turtyissinking.capabilities.playerbones.PlayerBones;
 import dev.turtywurty.turtyissinking.capabilities.playerbones.PlayerBonesCapability;
-import dev.turtywurty.turtyissinking.client.Keys;
+import dev.turtywurty.turtyissinking.client.KeyBindings;
 import dev.turtywurty.turtyissinking.client.screens.BonesawScreen.PlayerBone;
+import dev.turtywurty.turtyissinking.client.screens.PictureGalleryScreen;
+import dev.turtywurty.turtyissinking.client.screens.ReviewPictureScreen;
+import dev.turtywurty.turtyissinking.entities.Wheelchair;
 import dev.turtywurty.turtyissinking.init.ItemInit;
 import dev.turtywurty.turtyissinking.items.BackpackItem;
 import dev.turtywurty.turtyissinking.items.SledgehammerItem;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.LocalPlayer;
@@ -57,23 +61,32 @@ public class ClientForgeEventHandler {
     private static final ResourceLocation ITEM_NAME = VanillaGuiOverlay.ITEM_NAME.id();
     
     private static final ResourceLocation WIDGETS_LOCATION = new ResourceLocation("textures/gui/widgets.png");
-    
-    @SuppressWarnings("resource")
+
     @SubscribeEvent
     public static void clientTick(ClientTickEvent event) {
-        if (Minecraft.getInstance().screen != null || Minecraft.getInstance().player == null
-            || Minecraft.getInstance().player.getItemBySlot(EquipmentSlot.CHEST).getItem() != ItemInit.BACKPACK.get())
+        Minecraft mc = Minecraft.getInstance();
+        final LocalPlayer player = mc.player;
+        if (player == null)
             return;
-        
-        final LocalPlayer player = Minecraft.getInstance().player;
-        if (Keys.INSTANCE.openBackpack.isDown()) {
-            Keys.INSTANCE.openBackpack.consumeClick();
-            BackpackItem
-                .openBackpack(player.getInventory().findSlotMatchingItem(player.getItemBySlot(EquipmentSlot.CHEST)));
+
+        if (KeyBindings.INSTANCE.openBackpack.isDown() && player.getItemBySlot(EquipmentSlot.CHEST).is(ItemInit.BACKPACK.get()) && mc.screen instanceof ReviewPictureScreen) {
+            KeyBindings.INSTANCE.openBackpack.consumeClick();
+            BackpackItem.openBackpack(player.getInventory().findSlotMatchingItem(player.getItemBySlot(EquipmentSlot.CHEST)));
+        }
+
+        if(KeyBindings.INSTANCE.openGallery.isDown() && player.getMainHandItem().is(ItemInit.CAMERA.get())) {
+            KeyBindings.INSTANCE.openGallery.consumeClick();
+            mc.setScreen(new PictureGalleryScreen());
+        }
+
+        if (KeyBindings.INSTANCE.wheelchairBoost.isDown() && player.getVehicle() instanceof Wheelchair wheelchair) {
+            KeyBindings.INSTANCE.wheelchairBoost.consumeClick();
+            wheelchair.setBoosting(true);
+        } else if(!KeyBindings.INSTANCE.wheelchairBoost.isDown() && player.getVehicle() instanceof Wheelchair wheelchair) {
+            wheelchair.setBoosting(false);
         }
     }
-    
-    @SuppressWarnings("resource")
+
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onClick(InteractionKeyMappingTriggered event) {
         final int key = event.getKeyMapping().getKey().getValue();
@@ -90,11 +103,12 @@ public class ClientForgeEventHandler {
             event.setSwingHand(false);
         }
     }
-    
-    @SuppressWarnings("resource")
+
     @SubscribeEvent
     public static void renderBlockHighlight(RenderHighlightEvent.Block event) {
         final Player player = Minecraft.getInstance().player;
+        if(player == null)
+            return;
         
         if (player.getMainHandItem().is(ItemInit.SLEDGEHAMMER.get())) {
             final List<BlockPos> positions = SledgehammerItem.getValidPositions(player, event.getTarget());
@@ -112,11 +126,18 @@ public class ClientForgeEventHandler {
             }
         }
     }
-    
-    @SuppressWarnings("resource")
+
     @SubscribeEvent
     public static void renderHand(RenderHandEvent event) {
         final Player player = Minecraft.getInstance().player;
+        if(player == null)
+            return;
+
+        if (player.getMainHandItem().is(ItemInit.CAMERA.get())) {
+            event.setCanceled(true);
+            return;
+        }
+
         final PlayerBones cap = player.getCapability(PlayerBonesCapability.PLAYER_BONES).orElse(null);
         if (cap == null)
             return;
@@ -125,8 +146,7 @@ public class ClientForgeEventHandler {
             event.setCanceled(true);
         }
     }
-    
-    @SuppressWarnings("resource")
+
     @SubscribeEvent
     public static void renderHighlight(RenderHighlightEvent event) {
         final Player player = Minecraft.getInstance().player;
@@ -138,10 +158,15 @@ public class ClientForgeEventHandler {
             event.setCanceled(true);
         }
     }
-    
-    @SuppressWarnings("resource")
+
     @SubscribeEvent
     public static void renderHUD(RenderGuiOverlayEvent.Pre event) {
+        Screen screen = Minecraft.getInstance().screen;
+        if(screen instanceof ReviewPictureScreen || screen instanceof PictureGalleryScreen) {
+            event.setCanceled(true);
+            return;
+        }
+
         final Player player = Minecraft.getInstance().player;
         if (player.getMainHandItem().is(ItemInit.CAMERA.get())
             && !(TurtyIsSinking.MODID + ":camera").equals(event.getOverlay().id().toString())) {
@@ -168,8 +193,7 @@ public class ClientForgeEventHandler {
             }
         }
     }
-    
-    @SuppressWarnings("resource")
+
     @SubscribeEvent
     public static void renderLevelStage(RenderLevelStageEvent event) {
         if (event.getStage() == Stage.AFTER_PARTICLES) {
@@ -248,7 +272,6 @@ public class ClientForgeEventHandler {
     }
     
     private static final class Hooks {
-        @SuppressWarnings("resource")
         private static void renderHotbar(RenderGuiOverlayEvent event, Player player) {
             final var gui = (ForgeGui) Minecraft.getInstance().gui;
             if (!gui.getMinecraft().options.hideGui) {

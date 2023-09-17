@@ -1,5 +1,6 @@
 package dev.turtywurty.turtyissinking.capabilities.playerbones;
 
+import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,7 +15,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 
 public class PlayerBonesProvider implements ICapabilitySerializable<ListTag> {
-    public static final ResourceLocation INDENTIFIER = new ResourceLocation(TurtyIsSinking.MODID, "player_bones");
+    public static final ResourceLocation IDENTIFIER = new ResourceLocation(TurtyIsSinking.MODID, "player_bones");
 
     private final PlayerBones backend = new PlayerBonesCapability();
     private final LazyOptional<PlayerBones> optional = LazyOptional.of(() -> this.backend);
@@ -39,8 +40,8 @@ public class PlayerBonesProvider implements ICapabilitySerializable<ListTag> {
     }
     
     public static void attach(AttachCapabilitiesEvent<Entity> event) {
-        final var provider = new PlayerBonesProvider();
-        
-        event.addCapability(INDENTIFIER, provider);
+        if (event.getObject() instanceof Player) {
+            event.addCapability(IDENTIFIER, new PlayerBonesProvider());
+        }
     }
 }
