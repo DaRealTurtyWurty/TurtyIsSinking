@@ -47,41 +47,9 @@ minecraft {
             property 'mixin.env.refMapRemappingFile', "${project.projectDir}/build/createSrgToMcp/output.srg"
             workingDirectory project.file('run')
 		    arg "-mixin.config="+archivesBaseName+".mixins.json"
-		    arg "-Dmixin.debug.export=true"
+		    arg "-mixin.debug.export=true"
 
             property 'forge.enabledGameTestNamespaces', archivesBaseName
-
-            mods {
-                turtyissinking {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        gameTestServer {
-		    properties 'mixin.env.remapRefMap': 'true'
-            property 'mixin.env.refMapRemappingFile', "${project.projectDir}/build/createSrgToMcp/output.srg"
-            workingDirectory project.file('run')
-		    arg "-mixin.config="+archivesBaseName+".mixins.json"
-		    arg "-Dmixin.debug.export=true"
-
-            property 'forge.enabledGameTestNamespaces', archivesBaseName
-
-            mods {
-                turtyissinking {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-		    properties 'mixin.env.remapRefMap': 'true'
-            property 'mixin.env.refMapRemappingFile', "${project.projectDir}/build/createSrgToMcp/output.srg"
-            workingDirectory project.file('run')
-		    arg "-mixin.config="+archivesBaseName+".mixins.json"
-		    arg "-Dmixin.debug.export=true"
-
-            args '--mod', archivesBaseName, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
                 turtyissinking {

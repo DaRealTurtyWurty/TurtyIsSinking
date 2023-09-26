@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
     "textures": {
-        "all": "turtyissinking:block/exp_ore"
+        "all": "turtyissinking:block/experience_ore"
     }
 }

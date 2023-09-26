@@ -1,13 +1,13 @@
 package dev.turtywurty.turtyissinking.client.handlers;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
 import dev.turtywurty.turtyissinking.client.ClientAccess;
 import dev.turtywurty.turtyissinking.client.KeyBindings;
 import dev.turtywurty.turtyissinking.client.layers.BackpackLayer;
 import dev.turtywurty.turtyissinking.client.layers.ThighHighsLayer;
 import dev.turtywurty.turtyissinking.client.models.*;
+import dev.turtywurty.turtyissinking.client.particles.PlayerSkinParticle;
 import dev.turtywurty.turtyissinking.client.renderers.blockentity.BackpackBERenderer;
 import dev.turtywurty.turtyissinking.client.renderers.blockentity.PlayerBoneBERenderer;
 import dev.turtywurty.turtyissinking.client.renderers.entity.BossBabyRenderer;
@@ -16,13 +16,9 @@ import dev.turtywurty.turtyissinking.client.screens.BackpackScreen;
 import dev.turtywurty.turtyissinking.client.screens.WheelchairScreen;
 import dev.turtywurty.turtyissinking.client.util.RenderingUtils;
 import dev.turtywurty.turtyissinking.entities.Wheelchair;
-import dev.turtywurty.turtyissinking.init.BlockEntityInit;
-import dev.turtywurty.turtyissinking.init.EntityInit;
-import dev.turtywurty.turtyissinking.init.ItemInit;
-import dev.turtywurty.turtyissinking.init.MenuInit;
+import dev.turtywurty.turtyissinking.init.*;
 import dev.turtywurty.turtyissinking.menus.BackpackMenu;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.PlayerModel;
@@ -39,11 +35,11 @@ import net.minecraftforge.client.event.EntityRenderersEvent.RegisterLayerDefinit
 import net.minecraftforge.client.event.EntityRenderersEvent.RegisterRenderers;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import org.spongepowered.asm.mixin.Unique;
 
 @Mod.EventBusSubscriber(modid = TurtyIsSinking.MODID, bus = Bus.MOD, value = Dist.CLIENT)
 public class ClientModEventHandler {
@@ -127,7 +123,12 @@ public class ClientModEventHandler {
             MenuScreens.register(MenuInit.WHEELCHAIR.get(), WheelchairScreen::new);
         });
     }
-    
+
+    @SubscribeEvent
+    public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
+        event.register(ParticleTypeInit.PLAYER_SKIN.get(), PlayerSkinParticle.Provider.INSTANCE);
+    }
+
     @SubscribeEvent
     public static void registerEntityRenderers(RegisterRenderers event) {
         event.registerBlockEntityRenderer(BlockEntityInit.BACKPACK.get(), BackpackBERenderer::new);
@@ -176,10 +177,16 @@ public class ClientModEventHandler {
         event.registerBelowAll("wheelchair_nitro", (gui, poseStack, partialTick, screenWidth, screenHeight) -> {
             LocalPlayer player = Minecraft.getInstance().player;
             if (player != null && player.getVehicle() instanceof Wheelchair wheelchair) {
+                if(!wheelchair.hasNitro())
+                    return;
+
                 int nitro = wheelchair.getNitro();
                 int maxNitro = wheelchair.getMaxNitro();
-                int percent = Math.round((float) nitro / (float) maxNitro);
-                if (percent == 0 || percent == Integer.MAX_VALUE || percent == Integer.MIN_VALUE)
+                if(maxNitro == 0)
+                    return;
+
+                float percent = (float) nitro / (float) maxNitro;
+                if (percent == Float.MAX_VALUE || percent == Float.MIN_VALUE || Float.isNaN(percent))
                     return;
 
                 int width = screenWidth / 2;
@@ -193,8 +200,8 @@ public class ClientModEventHandler {
                 GuiComponent.fill(poseStack, x - 1, y - 1, x + width + 1, y + height + 1, 0x80000000);
                 RenderSystem.disableBlend();
 
-                width *= percent;
-                RenderingUtils.drawGradientRect(x, y, width, height, 0xFFFF0000, 0xFF0000FF);
+                int barWidth = (int) (width * percent);
+                RenderingUtils.drawGradientRect(x, y, barWidth, height, 0xFFFF0000, 0xFF0000FF);
             }
         });
     }

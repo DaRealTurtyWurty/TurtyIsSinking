@@ -26,16 +26,16 @@ public class ItemInit {
     public static final RegistryObject<BonesawItem> BONESAW = ITEMS.register("bonesaw",
         () -> new BonesawItem(defaultProps().stacksTo(1)));
     
-    public static final RegistryObject<BlockItem> PLAYER_LEFT_ARM = ITEMS.register("player_left_arm",
-        () -> new BlockItem(BlockInit.PLAYER_LEFT_ARM.get(), defaultProps()));
-    public static final RegistryObject<BlockItem> PLAYER_RIGHT_ARM = ITEMS.register("player_right_arm",
-        () -> new BlockItem(BlockInit.PLAYER_RIGHT_ARM.get(), defaultProps()));
-    public static final RegistryObject<BlockItem> PLAYER_LEFT_LEG = ITEMS.register("player_left_leg",
-        () -> new BlockItem(BlockInit.PLAYER_LEFT_LEG.get(), defaultProps()));
-    public static final RegistryObject<BlockItem> PLAYER_RIGHT_LEG = ITEMS.register("player_right_leg",
-        () -> new BlockItem(BlockInit.PLAYER_RIGHT_LEG.get(), defaultProps()));
-    public static final RegistryObject<BlockItem> PLAYER_BODY = ITEMS.register("player_body",
-        () -> new BlockItem(BlockInit.PLAYER_BODY.get(), defaultProps()));
+    public static final RegistryObject<PlayerBoneItem> PLAYER_LEFT_ARM = ITEMS.register("player_left_arm",
+        () -> new PlayerBoneItem(BlockInit.PLAYER_LEFT_ARM.get(), defaultProps()));
+    public static final RegistryObject<PlayerBoneItem> PLAYER_RIGHT_ARM = ITEMS.register("player_right_arm",
+        () -> new PlayerBoneItem(BlockInit.PLAYER_RIGHT_ARM.get(), defaultProps()));
+    public static final RegistryObject<PlayerBoneItem> PLAYER_LEFT_LEG = ITEMS.register("player_left_leg",
+        () -> new PlayerBoneItem(BlockInit.PLAYER_LEFT_LEG.get(), defaultProps()));
+    public static final RegistryObject<PlayerBoneItem> PLAYER_RIGHT_LEG = ITEMS.register("player_right_leg",
+        () -> new PlayerBoneItem(BlockInit.PLAYER_RIGHT_LEG.get(), defaultProps()));
+    public static final RegistryObject<PlayerBoneItem> PLAYER_BODY = ITEMS.register("player_body",
+        () -> new PlayerBoneItem(BlockInit.PLAYER_BODY.get(), defaultProps()));
     
     public static final RegistryObject<CameraItem> CAMERA = ITEMS.register("camera",
         () -> new CameraItem(defaultProps().stacksTo(1)));

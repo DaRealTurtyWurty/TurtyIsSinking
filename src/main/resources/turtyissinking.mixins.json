@@ -4,11 +4,13 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "turtyissinking.refmap.json",
   "mixins": [
+    "EntityMixin",
     "InventoryMenuMixin",
     "PlayerMixin",
     "ServerGamePacketListenerImplMixin"
   ],
   "client": [
+    "client.CameraMixin",
     "client.GuiMixin",
     "client.ItemRendererMixin",
     "client.LocalPlayerMixin",

@@ -42,9 +42,7 @@ public class ForgeEventHandler {
     }
 
     @SubscribeEvent
-    public static void attachItemCaps(AttachCapabilitiesEvent<ItemStack> event) {
-
-    }
+    public static void attachItemCaps(AttachCapabilitiesEvent<ItemStack> event) {}
 
     @SubscribeEvent
     public static void breakBlock(BreakEvent event) {

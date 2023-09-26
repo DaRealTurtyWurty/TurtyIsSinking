@@ -4,6 +4,7 @@ import dev.turtywurty.turtyissinking.TurtyIsSinking;
 import dev.turtywurty.turtyissinking.items.NitroCanisterItem;
 import dev.turtywurty.turtyissinking.menus.WheelchairMenu;
 import dev.turtywurty.turtyissinking.networking.PacketHandler;
+import dev.turtywurty.turtyissinking.networking.clientbound.CSyncWheelchairInventoryPacket;
 import dev.turtywurty.turtyissinking.networking.serverbound.SWheelchairBoostPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -40,35 +41,21 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class Wheelchair extends LivingEntity implements PlayerRideable, MenuProvider, IEntityAdditionalSpawnData {
-    private static final Component CONTAINER_NAME = Component.translatable("container." + TurtyIsSinking.MODID + ".wheelchair");
+    private static final Component CONTAINER_NAME =
+            Component.translatable("container." + TurtyIsSinking.MODID + ".wheelchair");
 
     private final ItemStackHandler inventory = new ItemStackHandler(2);
     private final LazyOptional<ItemStackHandler> optional = LazyOptional.of(() -> this.inventory);
 
-    private static final EntityDataAccessor<Boolean> IS_BOOSTING = SynchedEntityData.defineId(Wheelchair.class, EntityDataSerializers.BOOLEAN);
-    private boolean isForwardKeyDown, isBackwardKeyDown, isLeftKeyDown, isRightKeyDown;
-
-    public void setForwardKeyDown(boolean forwardKeyDown) {
-        isForwardKeyDown = forwardKeyDown;
-    }
-
-    public void setBackwardKeyDown(boolean backwardKeyDown) {
-        isBackwardKeyDown = backwardKeyDown;
-    }
-
-    public void setLeftKeyDown(boolean leftKeyDown) {
-        isLeftKeyDown = leftKeyDown;
-    }
-
-    public void setRightKeyDown(boolean rightKeyDown) {
-        isRightKeyDown = rightKeyDown;
-    }
+    private static final EntityDataAccessor<Boolean> IS_BOOSTING =
+            SynchedEntityData.defineId(Wheelchair.class, EntityDataSerializers.BOOLEAN);
 
     public Wheelchair(EntityType<Wheelchair> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -192,11 +179,6 @@ public class Wheelchair extends LivingEntity implements PlayerRideable, MenuProv
 
     @Override
     public void travel(@NotNull Vec3 pTravelVector) {
-        this.isForwardKeyDown = false;
-        this.isBackwardKeyDown = false;
-        this.isLeftKeyDown = false;
-        this.isRightKeyDown = false;
-
         if (isAlive()) {
             final LivingEntity rider = getControllingPassenger();
             if (isVehicle() && rider != null) {
@@ -211,17 +193,12 @@ public class Wheelchair extends LivingEntity implements PlayerRideable, MenuProv
 
                 this.flyingSpeed = getSpeed() * 0.1F;
                 if (isControlledByLocalInstance()) {
-                    this.isForwardKeyDown = rider.zza > 0;
-                    this.isBackwardKeyDown = rider.zza < 0;
-                    this.isLeftKeyDown = rider.xxa < 0;
-                    this.isRightKeyDown = rider.xxa > 0;
-
                     float speed = (float) getAttributeValue(Attributes.MOVEMENT_SPEED);
 
                     boolean isUsingNitro = isBoosting() && hasNitro() && getDeltaMovement().x != 0 && getDeltaMovement().z != 0;
                     if (isUsingNitro) {
                         speed *= 5F;
-                        PacketHandler.INSTANCE.sendToServer(new SWheelchairBoostPacket(getId(), speed, this.isForwardKeyDown, this.isBackwardKeyDown, this.isLeftKeyDown, this.isRightKeyDown));
+                        PacketHandler.INSTANCE.sendToServer(new SWheelchairBoostPacket(getId()));
                     }
 
                     setSpeed(speed);
@@ -244,13 +221,15 @@ public class Wheelchair extends LivingEntity implements PlayerRideable, MenuProv
     }
 
     public void boostFling() {
-        Entity entity = getControllingPassenger();
-        if (entity != null) {
-            entity.stopRiding();
+        if (getRandom().nextInt(100) == 0) {
+            Entity entity = getControllingPassenger();
+            if (entity != null) {
+                entity.stopRiding();
 
-            Vec3 force = entity.getLookAngle().multiply(100, 10, 100);
-            entity.push(force.x, Math.abs(force.y), force.z);
-            entity.hurtMarked = true;
+                Vec3 force = entity.getLookAngle().multiply(100, 10, 100);
+                entity.push(force.x, Math.abs(force.y), force.z);
+                entity.hurtMarked = true;
+            }
         }
     }
 
@@ -314,6 +293,10 @@ public class Wheelchair extends LivingEntity implements PlayerRideable, MenuProv
         return this.inventory.getStackInSlot(slot);
     }
 
+    public void setStackInSlot(int slot, ItemStack stack) {
+        this.inventory.setStackInSlot(slot, stack);
+    }
+
     public boolean hasNitro() {
         ItemStack stack0 = getStackInSlot(0);
         CompoundTag tag0 = stack0.getOrCreateTagElement(TurtyIsSinking.MODID);
@@ -333,9 +316,9 @@ public class Wheelchair extends LivingEntity implements PlayerRideable, MenuProv
             nitro--;
             tag.putInt("nitro", nitro);
             this.inventory.setStackInSlot(0, stack);
+            updateInventory();
 
-            if (getRandom().nextInt(1000) == 0)
-                boostFling();
+            boostFling();
 
             return;
         }
@@ -347,9 +330,9 @@ public class Wheelchair extends LivingEntity implements PlayerRideable, MenuProv
             nitro--;
             tag.putInt("nitro", nitro);
             this.inventory.setStackInSlot(1, stack);
+            updateInventory();
 
-            if (getRandom().nextInt(1000) == 0)
-                boostFling();
+            boostFling();
         }
     }
 
@@ -371,17 +354,18 @@ public class Wheelchair extends LivingEntity implements PlayerRideable, MenuProv
     }
 
     public int getNitro() {
-        ItemStack stack0 = getStackInSlot(0);
-        CompoundTag tag0 = stack0.getOrCreateTagElement(TurtyIsSinking.MODID);
-        if (tag0.contains("nitro", Tag.TAG_INT))
-            return NitroCanisterItem.getNitro(stack0);
+        int nitro = 0;
+        ItemStack stack = getStackInSlot(0);
+        CompoundTag tag = stack.getOrCreateTagElement(TurtyIsSinking.MODID);
+        if (tag.contains("nitro", Tag.TAG_INT))
+            nitro += NitroCanisterItem.getNitro(stack);
 
-        ItemStack stack1 = getStackInSlot(1);
-        CompoundTag tag1 = stack1.getOrCreateTagElement(TurtyIsSinking.MODID);
-        if (tag1.contains("nitro", Tag.TAG_INT))
-            return NitroCanisterItem.getNitro(stack1);
+        stack = getStackInSlot(1);
+        tag = stack.getOrCreateTagElement(TurtyIsSinking.MODID);
+        if (tag.contains("nitro", Tag.TAG_INT))
+            nitro += NitroCanisterItem.getNitro(stack);
 
-        return 0;
+        return nitro;
     }
 
     public int getMaxNitro() {
@@ -395,7 +379,8 @@ public class Wheelchair extends LivingEntity implements PlayerRideable, MenuProv
         return maxNitro;
     }
 
-    public void serverMovement() {
-        super.travel(new Vec3(this.isLeftKeyDown ? -1 : this.isRightKeyDown ? 1 : 0, 0, this.isForwardKeyDown ? 1 : this.isBackwardKeyDown ? -1 : 0));
+    public void updateInventory() {
+        PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this),
+                new CSyncWheelchairInventoryPacket(getId(), getStackInSlot(0), getStackInSlot(1)));
     }
 }

@@ -1,16 +1,14 @@
 package dev.turtywurty.turtyissinking.client.screens;
 
-import java.util.function.Function;
-
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
 import dev.turtywurty.turtyissinking.capabilities.playerbones.PlayerBones;
 import dev.turtywurty.turtyissinking.capabilities.playerbones.PlayerBonesCapability;
 import dev.turtywurty.turtyissinking.networking.PacketHandler;
 import dev.turtywurty.turtyissinking.networking.serverbound.SSawBonePacket;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
@@ -20,6 +18,8 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.function.Function;
 
 public class BonesawScreen extends Screen {
     private static final ResourceLocation TEXTURE = new ResourceLocation(TurtyIsSinking.MODID,
@@ -79,21 +79,21 @@ public class BonesawScreen extends Screen {
         
         private final String name;
         private final ResourceLocation textureLoc;
-        private final Function<PlayerModel, ModelPart[]> partGetter;
+        private final Function<PlayerModel<?>, ModelPart[]> partGetter;
         
-        PlayerBone(Function<PlayerModel, ModelPart[]> partGetter) {
+        PlayerBone(Function<PlayerModel<?>, ModelPart[]> partGetter) {
             this.name = name().toLowerCase();
             this.textureLoc = texture(this.name);
             this.partGetter = partGetter;
         }
         
-        PlayerBone(String textureName, Function<PlayerModel, ModelPart[]> partGetter) {
+        PlayerBone(String textureName, Function<PlayerModel<?>, ModelPart[]> partGetter) {
             this.name = name().toLowerCase();
             this.textureLoc = texture(textureName);
             this.partGetter = partGetter;
         }
         
-        public ModelPart[] getParts(PlayerModel model) {
+        public ModelPart[] getParts(PlayerModel<?> model) {
             return this.partGetter.apply(model);
         }
 
@@ -119,7 +119,7 @@ public class BonesawScreen extends Screen {
             
             switch (bone) {
                 case HEAD:
-                    setY(getY() - this.height + 4);
+                    setY(getY() - this.height - 3);
                     break;
                 case RIGHT_LEG:
                     setX(getX() + this.width / 2);
@@ -130,7 +130,7 @@ public class BonesawScreen extends Screen {
                     setY(getY() + this.height);
                     break;
                 case LEFT_ARM:
-                    setX(getX() - this.width + 4);
+                    setX(getX() - this.width - 4);
                     break;
                 case RIGHT_ARM:
                     setX(getX() + this.width + 4);
