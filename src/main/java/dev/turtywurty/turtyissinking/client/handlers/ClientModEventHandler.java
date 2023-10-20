@@ -9,6 +9,7 @@ import dev.turtywurty.turtyissinking.client.layers.ThighHighsLayer;
 import dev.turtywurty.turtyissinking.client.models.*;
 import dev.turtywurty.turtyissinking.client.particles.PlayerSkinParticle;
 import dev.turtywurty.turtyissinking.client.renderers.blockentity.BackpackBERenderer;
+import dev.turtywurty.turtyissinking.client.renderers.blockentity.ClaymoreBERenderer;
 import dev.turtywurty.turtyissinking.client.renderers.blockentity.PlayerBoneBERenderer;
 import dev.turtywurty.turtyissinking.client.renderers.entity.BossBabyRenderer;
 import dev.turtywurty.turtyissinking.client.renderers.entity.WheelchairRenderer;
@@ -135,6 +136,7 @@ public class ClientModEventHandler {
         event.registerEntityRenderer(EntityInit.BOSS_BABY.get(), BossBabyRenderer::new);
         event.registerEntityRenderer(EntityInit.WHEELCHAIR.get(), WheelchairRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityInit.PLAYER_BONE.get(), PlayerBoneBERenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.CLAYMORE.get(), ClaymoreBERenderer::new);
     }
     
     @SubscribeEvent

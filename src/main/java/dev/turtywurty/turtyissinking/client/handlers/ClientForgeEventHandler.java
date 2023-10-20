@@ -1,17 +1,12 @@
 package dev.turtywurty.turtyissinking.client.handlers;
 
-import java.util.List;
-import java.util.SortedSet;
-
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.SheetedDecalTextureGenerator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
 import dev.turtywurty.turtyissinking.capabilities.playerbones.PlayerBones;
 import dev.turtywurty.turtyissinking.capabilities.playerbones.PlayerBonesCapability;
-import dev.turtywurty.turtyissinking.client.ClientAccess;
 import dev.turtywurty.turtyissinking.client.KeyBindings;
 import dev.turtywurty.turtyissinking.client.screens.BonesawScreen.PlayerBone;
 import dev.turtywurty.turtyissinking.client.screens.PictureGalleryScreen;
@@ -21,16 +16,13 @@ import dev.turtywurty.turtyissinking.init.ItemInit;
 import dev.turtywurty.turtyissinking.items.BackpackItem;
 import dev.turtywurty.turtyissinking.items.SledgehammerItem;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
-import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -44,12 +36,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent.InteractionKeyMappingTriggered;
-import net.minecraftforge.client.event.RenderGuiOverlayEvent;
-import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.client.event.RenderHighlightEvent;
-import net.minecraftforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.event.RenderLevelStageEvent.Stage;
-import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.client.model.data.ModelData;
@@ -58,6 +46,9 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+
+import java.util.List;
+import java.util.SortedSet;
 
 @Mod.EventBusSubscriber(modid = TurtyIsSinking.MODID, bus = Bus.FORGE, value = Dist.CLIENT)
 public class ClientForgeEventHandler {
