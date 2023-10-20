@@ -1,14 +1,9 @@
 package dev.turtywurty.turtyissinking;
 
+import dev.turtywurty.turtyissinking.init.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dev.turtywurty.turtyissinking.init.BlockEntityInit;
-import dev.turtywurty.turtyissinking.init.BlockInit;
-import dev.turtywurty.turtyissinking.init.EnchantmentInit;
-import dev.turtywurty.turtyissinking.init.EntityInit;
-import dev.turtywurty.turtyissinking.init.ItemInit;
-import dev.turtywurty.turtyissinking.init.MenuInit;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -40,5 +35,6 @@ public class TurtyIsSinking {
         MenuInit.MENU_TYPES.register(bus);
         EnchantmentInit.ENCHANTMENTS.register(bus);
         EntityInit.ENTITIES.register(bus);
+        ParticleTypeInit.PARTICLE_TYPES.register(bus);
     }
 }
