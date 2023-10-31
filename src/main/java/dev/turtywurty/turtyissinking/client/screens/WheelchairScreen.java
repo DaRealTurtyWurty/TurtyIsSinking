@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class WheelchairScreen extends AbstractContainerScreen<WheelchairMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(TurtyIsSinking.MODID, "textures/gui/wheelchair.png");
+            new ResourceLocation(TurtyIsSinking.MOD_ID, "textures/gui/wheelchair.png");
 
     public WheelchairScreen(WheelchairMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);

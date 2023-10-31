@@ -35,5 +35,7 @@
     "itemGroup.turtyissinking": "Turty is Sinking",
     "item.turtyissinking.nitro_canister": "Nitro Canister",
     "container.turtyissinking.wheelchair": "Wheelchair",
-    "tooltip.turtyissinking.nitro_canister": "Nitro"
+    "tooltip.turtyissinking.nitro_canister": "Nitro",
+    "screen.turtyissinking.quarry.width": "Width",
+    "screen.turtyissinking.quarry.height": "Height"
 }

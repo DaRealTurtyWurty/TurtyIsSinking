@@ -33,7 +33,7 @@ public class PlayerBoneItem extends BlockItem {
     }
 
     public static void setPlayer(@NotNull ItemStack stack, @NotNull GameProfile profile) {
-        CompoundTag tag = stack.getOrCreateTagElement(TurtyIsSinking.MODID);
+        CompoundTag tag = stack.getOrCreateTagElement(TurtyIsSinking.MOD_ID);
         tag.put("Profile", NbtUtils.writeGameProfile(new CompoundTag(), profile));
     }
 
@@ -42,7 +42,7 @@ public class PlayerBoneItem extends BlockItem {
     }
 
     public static @Nullable GameProfile getPlayer(ItemStack stack) {
-        CompoundTag tag = stack.getTagElement(TurtyIsSinking.MODID);
+        CompoundTag tag = stack.getTagElement(TurtyIsSinking.MOD_ID);
         if (tag != null && tag.contains("Profile", Tag.TAG_COMPOUND)) {
             return NbtUtils.readGameProfile(tag.getCompound("Profile"));
         }
@@ -51,7 +51,7 @@ public class PlayerBoneItem extends BlockItem {
     }
 
     public static boolean hasPlayer(ItemStack stack) {
-        CompoundTag tag = stack.getTagElement(TurtyIsSinking.MODID);
+        CompoundTag tag = stack.getTagElement(TurtyIsSinking.MOD_ID);
         return tag != null && tag.contains("Profile", Tag.TAG_COMPOUND);
     }
 }

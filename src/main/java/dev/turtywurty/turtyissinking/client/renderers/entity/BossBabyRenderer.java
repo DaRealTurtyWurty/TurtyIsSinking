@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class BossBabyRenderer extends MobRenderer<BossBaby, BossBabyModel> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(TurtyIsSinking.MODID,
+    private static final ResourceLocation TEXTURE = new ResourceLocation(TurtyIsSinking.MOD_ID,
         "textures/entity/boss_baby.png");
     
     public BossBabyRenderer(EntityRendererProvider.Context ctx) {

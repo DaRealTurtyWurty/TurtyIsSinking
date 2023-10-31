@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 public class WheelchairRenderer extends LivingEntityRenderer<Wheelchair, WheelchairModel<Wheelchair>> {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(TurtyIsSinking.MODID,
+    public static final ResourceLocation TEXTURE = new ResourceLocation(TurtyIsSinking.MOD_ID,
         "textures/entity/wheelchair.png");
     
     public WheelchairRenderer(EntityRendererProvider.Context pContext) {

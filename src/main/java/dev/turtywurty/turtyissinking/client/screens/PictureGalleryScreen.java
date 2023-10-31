@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class PictureGalleryScreen extends Screen {
-    private static final Component TITLE = Component.translatable("screen." + TurtyIsSinking.MODID + ".view_gallery");
-    private static final Component IMAGE_FAILED_TO_LOAD = Component.translatable("screen." + TurtyIsSinking.MODID + ".image_failed_to_load");
+    private static final Component TITLE = Component.translatable("screen." + TurtyIsSinking.MOD_ID + ".view_gallery");
+    private static final Component IMAGE_FAILED_TO_LOAD = Component.translatable("screen." + TurtyIsSinking.MOD_ID + ".image_failed_to_load");
 
     private ScrollableGallery gallery;
 
@@ -50,7 +50,7 @@ public class PictureGalleryScreen extends Screen {
             }
 
             try {
-                Path galleryPath = Path.of(this.minecraft.gameDirectory.getAbsolutePath(), "screenshots", TurtyIsSinking.MODID);
+                Path galleryPath = Path.of(this.minecraft.gameDirectory.getAbsolutePath(), "screenshots", TurtyIsSinking.MOD_ID);
                 Files.createDirectories(galleryPath);
 
                 List<ScrollableGallery.GalleryEntry> entries = new ArrayList<>();

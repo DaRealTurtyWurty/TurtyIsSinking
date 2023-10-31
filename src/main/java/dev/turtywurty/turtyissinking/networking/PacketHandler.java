@@ -4,17 +4,19 @@ import dev.turtywurty.turtyissinking.TurtyIsSinking;
 import dev.turtywurty.turtyissinking.networking.clientbound.CSyncPlayerBonesPacket;
 import dev.turtywurty.turtyissinking.networking.clientbound.CSyncWheelchairInventoryPacket;
 import dev.turtywurty.turtyissinking.networking.serverbound.SOpenBackpackPacket;
+import dev.turtywurty.turtyissinking.networking.serverbound.SPianoKeyPacket;
 import dev.turtywurty.turtyissinking.networking.serverbound.SSawBonePacket;
 import dev.turtywurty.turtyissinking.networking.serverbound.SWheelchairBoostPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class PacketHandler {
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
-            new ResourceLocation(TurtyIsSinking.MODID, "main"),
+            new ResourceLocation(TurtyIsSinking.MOD_ID, "main"),
             () -> PROTOCOL_VERSION,
             PROTOCOL_VERSION::equals,
             PROTOCOL_VERSION::equals);
@@ -51,6 +53,14 @@ public final class PacketHandler {
                 .consumerMainThread(CSyncWheelchairInventoryPacket::handle)
                 .add();
 
-        TurtyIsSinking.LOGGER.info("Registered {} packets for mod '{}'", index, TurtyIsSinking.MODID);
+        TurtyIsSinking.LOGGER.info("Registered {} packets for mod '{}'", index, TurtyIsSinking.MOD_ID);
+    }
+
+    public static void sendToAllClients(Object packet) {
+        INSTANCE.send(PacketDistributor.ALL.noArg(), packet);
+    }
+
+    public static void sendToServer(Object packet) {
+        INSTANCE.sendToServer(packet);
     }
 }

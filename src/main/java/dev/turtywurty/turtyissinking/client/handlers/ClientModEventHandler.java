@@ -42,7 +42,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@Mod.EventBusSubscriber(modid = TurtyIsSinking.MODID, bus = Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = TurtyIsSinking.MOD_ID, bus = Bus.MOD, value = Dist.CLIENT)
 public class ClientModEventHandler {
     @SubscribeEvent
     public static void addEntityLayers(AddLayers event) {

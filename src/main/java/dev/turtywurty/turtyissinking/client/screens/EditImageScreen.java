@@ -16,8 +16,8 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.file.Path;
 
 public class EditImageScreen extends Screen {
-    private static final Component TITLE = Component.translatable("screen." + TurtyIsSinking.MODID + ".edit_image");
-    private static final Component BACK_BUTTON = Component.translatable("button." + TurtyIsSinking.MODID + "edit_image.back");
+    private static final Component TITLE = Component.translatable("screen." + TurtyIsSinking.MOD_ID + ".edit_image");
+    private static final Component BACK_BUTTON = Component.translatable("button." + TurtyIsSinking.MOD_ID + "edit_image.back");
 
     private final NativeImage picture;
     private final Path picturePath;
@@ -41,7 +41,7 @@ public class EditImageScreen extends Screen {
         }
 
         TextureManager textureManager = Minecraft.getInstance().getTextureManager();
-        this.location = textureManager.register(TurtyIsSinking.MODID + ".edit_camera_image", this.texture);
+        this.location = textureManager.register(TurtyIsSinking.MOD_ID + ".edit_camera_image", this.texture);
     }
 
     @Override

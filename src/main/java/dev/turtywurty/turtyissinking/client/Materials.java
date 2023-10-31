@@ -7,5 +7,5 @@ import net.minecraft.world.inventory.InventoryMenu;
 
 public final class Materials {
     public static final Material BACKPACK_LOCATION = new Material(InventoryMenu.BLOCK_ATLAS,
-        new ResourceLocation(TurtyIsSinking.MODID, "block/backpack"));
+        new ResourceLocation(TurtyIsSinking.MOD_ID, "block/backpack"));
 }

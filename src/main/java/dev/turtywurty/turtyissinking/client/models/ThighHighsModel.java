@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ThighHighsModel<T extends LivingEntity> extends HumanoidModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION =
-			new ModelLayerLocation(new ResourceLocation(TurtyIsSinking.MODID, "thigh_highs"), "main");
+			new ModelLayerLocation(new ResourceLocation(TurtyIsSinking.MOD_ID, "thigh_highs"), "main");
 
 	private final ModelPart leftPants;
 	private final ModelPart rightPants;

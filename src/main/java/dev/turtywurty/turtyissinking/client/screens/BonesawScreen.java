@@ -8,7 +8,6 @@ import dev.turtywurty.turtyissinking.capabilities.playerbones.PlayerBonesCapabil
 import dev.turtywurty.turtyissinking.networking.PacketHandler;
 import dev.turtywurty.turtyissinking.networking.serverbound.SSawBonePacket;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
@@ -22,7 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.function.Function;
 
 public class BonesawScreen extends Screen {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(TurtyIsSinking.MODID,
+    private static final ResourceLocation TEXTURE = new ResourceLocation(TurtyIsSinking.MOD_ID,
         "textures/gui/bonesaw.png");
     
     private int leftPos, topPos;
@@ -31,7 +30,7 @@ public class BonesawScreen extends Screen {
     private final ItemStack item;
     
     public BonesawScreen(ItemStack item) {
-        super(Component.translatable("screen." + TurtyIsSinking.MODID + ".bonesaw"));
+        super(Component.translatable("screen." + TurtyIsSinking.MOD_ID + ".bonesaw"));
         this.imageWidth = 176;
         this.imageHeight = 166;
         this.item = item;
@@ -98,7 +97,7 @@ public class BonesawScreen extends Screen {
         }
 
         private static ResourceLocation texture(String name) {
-            return new ResourceLocation(TurtyIsSinking.MODID, "textures/gui/bonesaw/" + name + ".png");
+            return new ResourceLocation(TurtyIsSinking.MOD_ID, "textures/gui/bonesaw/" + name + ".png");
         }
     }
     

@@ -49,7 +49,7 @@ import java.util.List;
 
 public class Wheelchair extends LivingEntity implements PlayerRideable, MenuProvider, IEntityAdditionalSpawnData {
     private static final Component CONTAINER_NAME =
-            Component.translatable("container." + TurtyIsSinking.MODID + ".wheelchair");
+            Component.translatable("container." + TurtyIsSinking.MOD_ID + ".wheelchair");
 
     private final ItemStackHandler inventory = new ItemStackHandler(2);
     private final LazyOptional<ItemStackHandler> optional = LazyOptional.of(() -> this.inventory);
@@ -299,18 +299,18 @@ public class Wheelchair extends LivingEntity implements PlayerRideable, MenuProv
 
     public boolean hasNitro() {
         ItemStack stack0 = getStackInSlot(0);
-        CompoundTag tag0 = stack0.getOrCreateTagElement(TurtyIsSinking.MODID);
+        CompoundTag tag0 = stack0.getOrCreateTagElement(TurtyIsSinking.MOD_ID);
         if (tag0.contains("nitro", Tag.TAG_INT) && NitroCanisterItem.getNitro(stack0) > 0)
             return true;
 
         ItemStack stack1 = getStackInSlot(1);
-        CompoundTag tag1 = stack1.getOrCreateTagElement(TurtyIsSinking.MODID);
+        CompoundTag tag1 = stack1.getOrCreateTagElement(TurtyIsSinking.MOD_ID);
         return tag1.contains("nitro", Tag.TAG_INT) && NitroCanisterItem.getNitro(stack1) > 0;
     }
 
     public void consumeNitro() {
         ItemStack stack = getStackInSlot(0);
-        CompoundTag tag = stack.getOrCreateTagElement(TurtyIsSinking.MODID);
+        CompoundTag tag = stack.getOrCreateTagElement(TurtyIsSinking.MOD_ID);
         int nitro = NitroCanisterItem.getNitro(stack);
         if (nitro > 0) {
             nitro--;
@@ -324,7 +324,7 @@ public class Wheelchair extends LivingEntity implements PlayerRideable, MenuProv
         }
 
         stack = getStackInSlot(1);
-        tag = stack.getOrCreateTagElement(TurtyIsSinking.MODID);
+        tag = stack.getOrCreateTagElement(TurtyIsSinking.MOD_ID);
         nitro = NitroCanisterItem.getNitro(stack);
         if (nitro > 0) {
             nitro--;
@@ -356,12 +356,12 @@ public class Wheelchair extends LivingEntity implements PlayerRideable, MenuProv
     public int getNitro() {
         int nitro = 0;
         ItemStack stack = getStackInSlot(0);
-        CompoundTag tag = stack.getOrCreateTagElement(TurtyIsSinking.MODID);
+        CompoundTag tag = stack.getOrCreateTagElement(TurtyIsSinking.MOD_ID);
         if (tag.contains("nitro", Tag.TAG_INT))
             nitro += NitroCanisterItem.getNitro(stack);
 
         stack = getStackInSlot(1);
-        tag = stack.getOrCreateTagElement(TurtyIsSinking.MODID);
+        tag = stack.getOrCreateTagElement(TurtyIsSinking.MOD_ID);
         if (tag.contains("nitro", Tag.TAG_INT))
             nitro += NitroCanisterItem.getNitro(stack);
 

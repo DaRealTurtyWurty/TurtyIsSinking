@@ -1,19 +1,16 @@
 package dev.turtywurty.turtyissinking.client.util;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.ResourceLocation;
 
 public final class RenderingUtils {
     private static final ResourceLocation VIGNETTE_LOCATION = new ResourceLocation("textures/misc/vignette.png");
-    private static final ResourceLocation CIRCLE_LOCATION = new ResourceLocation(TurtyIsSinking.MODID,
+    private static final ResourceLocation CIRCLE_LOCATION = new ResourceLocation(TurtyIsSinking.MOD_ID,
         "textures/misc/shadow.png");
 
     public static void renderCircle(PoseStack poseStack, int x, int y, int size, int red, int green, int blue,

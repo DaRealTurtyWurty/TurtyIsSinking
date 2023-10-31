@@ -161,7 +161,7 @@ public class ScrollableGallery extends ScrollPanel {
 
             TextureManager manager = Minecraft.getInstance().getTextureManager();
             this.textureLocation = manager.register(
-                    TurtyIsSinking.MODID + ".camera_image_" + name,
+                    TurtyIsSinking.MOD_ID + ".camera_image_" + name,
                     this.texture = new DynamicTexture(this.image));
         }
 

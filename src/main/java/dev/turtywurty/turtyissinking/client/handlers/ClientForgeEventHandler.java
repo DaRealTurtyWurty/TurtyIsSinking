@@ -50,7 +50,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import java.util.List;
 import java.util.SortedSet;
 
-@Mod.EventBusSubscriber(modid = TurtyIsSinking.MODID, bus = Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = TurtyIsSinking.MOD_ID, bus = Bus.FORGE, value = Dist.CLIENT)
 public class ClientForgeEventHandler {
     private static final ResourceLocation HOTBAR = VanillaGuiOverlay.HOTBAR.id();
     private static final ResourceLocation ITEM_NAME = VanillaGuiOverlay.ITEM_NAME.id();
@@ -164,7 +164,7 @@ public class ClientForgeEventHandler {
 
         final Player player = Minecraft.getInstance().player;
         if (player.getMainHandItem().is(ItemInit.CAMERA.get())
-            && !(TurtyIsSinking.MODID + ":camera").equals(event.getOverlay().id().toString())) {
+            && !(TurtyIsSinking.MOD_ID + ":camera").equals(event.getOverlay().id().toString())) {
             event.setCanceled(true);
             return;
         }

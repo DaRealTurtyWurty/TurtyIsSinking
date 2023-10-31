@@ -21,12 +21,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class ReviewPictureScreen extends Screen {
-    private static final Component TITLE = Component.translatable("screen." + TurtyIsSinking.MODID + ".view_picture");
-    private static final Component CANCEL_BUTTON = Component.translatable("button." + TurtyIsSinking.MODID + ".view_picture.cancel");
-    private static final Component SAVE_BUTTON = Component.translatable("button." + TurtyIsSinking.MODID + ".view_picture.save");
-    private static final Component SAVE_FAILED = Component.translatable("message." + TurtyIsSinking.MODID + ".view_picture.save_failed");
-    private static final Component NAME_HINT = Component.translatable("hint." + TurtyIsSinking.MODID + ".view_picture.name");
-    private static final Component NAME_NARRATION = Component.translatable("narration." + TurtyIsSinking.MODID + ".view_picture.name");
+    private static final Component TITLE = Component.translatable("screen." + TurtyIsSinking.MOD_ID + ".view_picture");
+    private static final Component CANCEL_BUTTON = Component.translatable("button." + TurtyIsSinking.MOD_ID + ".view_picture.cancel");
+    private static final Component SAVE_BUTTON = Component.translatable("button." + TurtyIsSinking.MOD_ID + ".view_picture.save");
+    private static final Component SAVE_FAILED = Component.translatable("message." + TurtyIsSinking.MOD_ID + ".view_picture.save_failed");
+    private static final Component NAME_HINT = Component.translatable("hint." + TurtyIsSinking.MOD_ID + ".view_picture.name");
+    private static final Component NAME_NARRATION = Component.translatable("narration." + TurtyIsSinking.MOD_ID + ".view_picture.name");
 
     private final NativeImage picture;
     private final DynamicTexture texture;
@@ -48,7 +48,7 @@ public class ReviewPictureScreen extends Screen {
         }
 
         TextureManager textureManager = Minecraft.getInstance().getTextureManager();
-        this.location = textureManager.register(TurtyIsSinking.MODID + ".camera_image", this.texture);
+        this.location = textureManager.register(TurtyIsSinking.MOD_ID + ".camera_image", this.texture);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class ReviewPictureScreen extends Screen {
         if(this.minecraft == null)
             return;
 
-        Path file = Path.of(this.minecraft.gameDirectory.getAbsolutePath(), "screenshots", TurtyIsSinking.MODID, this.nameBox.getValue() + ".png");
+        Path file = Path.of(this.minecraft.gameDirectory.getAbsolutePath(), "screenshots", TurtyIsSinking.MOD_ID, this.nameBox.getValue() + ".png");
         Util.ioPool().execute(() -> {
             try {
                 Files.createDirectories(file.getParent());

@@ -10,7 +10,6 @@ import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -19,13 +18,12 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class ThighHighsLayer<T extends LivingEntity, M extends HumanoidModel<T>, A extends ThighHighsModel<T>> extends RenderLayer<T, M> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(TurtyIsSinking.MODID, "textures/entity/thigh_highs.png");
+            new ResourceLocation(TurtyIsSinking.MOD_ID, "textures/entity/thigh_highs.png");
 
     private final A model;
 

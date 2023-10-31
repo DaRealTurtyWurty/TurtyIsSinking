@@ -12,9 +12,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class BackpackScreen extends AbstractContainerScreen<BackpackMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(TurtyIsSinking.MODID,
+    private static final ResourceLocation TEXTURE = new ResourceLocation(TurtyIsSinking.MOD_ID,
         "textures/gui/backpack.png");
-    private static final Component TITLE = Component.translatable("container." + TurtyIsSinking.MODID + ".backpack");
+    private static final Component TITLE = Component.translatable("container." + TurtyIsSinking.MOD_ID + ".backpack");
     
     public BackpackScreen(BackpackMenu menu, Inventory inventory) {
         super(menu, inventory, TITLE);

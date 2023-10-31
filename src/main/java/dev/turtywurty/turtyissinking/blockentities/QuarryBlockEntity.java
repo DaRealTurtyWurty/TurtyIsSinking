@@ -11,7 +11,7 @@ public class QuarryBlockEntity extends SyncingBlockEntity implements TickableBlo
     private int offsetX, offsetY, offsetZ;
     
     public QuarryBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(BlockEntityInit.QUARRY.get(), pPos, pBlockState);
+        super(/*BlockEntityInit.QUARRY.get()*/ null, pPos, pBlockState);
     }
     
     @Override

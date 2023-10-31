@@ -15,7 +15,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 
 public class PlayerBonesProvider implements ICapabilitySerializable<ListTag> {
-    public static final ResourceLocation IDENTIFIER = new ResourceLocation(TurtyIsSinking.MODID, "player_bones");
+    public static final ResourceLocation IDENTIFIER = new ResourceLocation(TurtyIsSinking.MOD_ID, "player_bones");
 
     private final PlayerBones backend = new PlayerBonesCapability();
     private final LazyOptional<PlayerBones> optional = LazyOptional.of(() -> this.backend);

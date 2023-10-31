@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
-@Mod.EventBusSubscriber(modid = TurtyIsSinking.MODID, bus = Bus.MOD)
+@Mod.EventBusSubscriber(modid = TurtyIsSinking.MOD_ID, bus = Bus.MOD)
 public class ModEventHandler {
     @SubscribeEvent
     public static void commonSetup(FMLCommonSetupEvent event) {
@@ -54,10 +54,10 @@ public class ModEventHandler {
     @SubscribeEvent
     public static void registerCreativeTabs(CreativeModeTabEvent.Register event) {
         TurtyIsSinking.setTab(event.registerCreativeModeTab(
-                new ResourceLocation(TurtyIsSinking.MODID, "tab"),
+                new ResourceLocation(TurtyIsSinking.MOD_ID, "tab"),
                 builder ->
                         builder.icon(() -> ItemInit.THIGH_HIGHS.get().getDefaultInstance())
-                        .title(Component.translatable("itemGroup." + TurtyIsSinking.MODID))));
+                        .title(Component.translatable("itemGroup." + TurtyIsSinking.MOD_ID))));
     }
 
     @SubscribeEvent

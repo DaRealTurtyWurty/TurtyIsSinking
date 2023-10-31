@@ -22,7 +22,6 @@ import net.minecraftforge.common.Tags.Blocks;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
@@ -34,7 +33,7 @@ import net.minecraftforge.network.PacketDistributor;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-@Mod.EventBusSubscriber(modid = TurtyIsSinking.MODID, bus = Bus.FORGE)
+@Mod.EventBusSubscriber(modid = TurtyIsSinking.MOD_ID, bus = Bus.FORGE)
 public class ForgeEventHandler {
     @SubscribeEvent
     public static void attachEntityCaps(AttachCapabilitiesEvent<Entity> event) {

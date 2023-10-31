@@ -12,13 +12,13 @@ import net.minecraftforge.registries.RegistryObject;
 
 public final class EntityInit {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES,
-        TurtyIsSinking.MODID);
+        TurtyIsSinking.MOD_ID);
 
     public static final RegistryObject<EntityType<BossBaby>> BOSS_BABY = ENTITIES.register("boss_baby",
         () -> EntityType.Builder.<BossBaby>of(BossBaby::new, MobCategory.AMBIENT).sized(.55f, 0.87f)
-            .build(new ResourceLocation(TurtyIsSinking.MODID, "boss_baby").toString()));
+            .build(new ResourceLocation(TurtyIsSinking.MOD_ID, "boss_baby").toString()));
 
     public static final RegistryObject<EntityType<Wheelchair>> WHEELCHAIR = ENTITIES.register("wheelchair",
         () -> EntityType.Builder.<Wheelchair>of(Wheelchair::new, MobCategory.MISC).sized(1f, 1.5f)
-            .build(new ResourceLocation(TurtyIsSinking.MODID, "wheelchair").toString()));
+            .build(new ResourceLocation(TurtyIsSinking.MOD_ID, "wheelchair").toString()));
 }

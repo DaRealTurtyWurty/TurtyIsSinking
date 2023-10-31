@@ -35,12 +35,12 @@ public class NitroCanisterItem extends Item {
                                 @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
         pTooltipComponents.add(
-                Component.translatable("tooltip." + TurtyIsSinking.MODID + ".nitro_canister")
+                Component.translatable("tooltip." + TurtyIsSinking.MOD_ID + ".nitro_canister")
                         .append(": " + (getNitroPercent(pStack) * 100) + "%"));
     }
 
     public static int getNitro(ItemStack stack) {
-        CompoundTag nbt = stack.getOrCreateTagElement(TurtyIsSinking.MODID);
+        CompoundTag nbt = stack.getOrCreateTagElement(TurtyIsSinking.MOD_ID);
         if(!nbt.contains("nitro", Tag.TAG_INT))
             nbt.putInt("nitro", MAX_NITRO);
 

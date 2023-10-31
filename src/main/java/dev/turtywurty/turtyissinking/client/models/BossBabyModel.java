@@ -18,7 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class BossBabyModel extends EntityModel<BossBaby> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-        new ResourceLocation(TurtyIsSinking.MODID, "boss_baby"), "main");
+        new ResourceLocation(TurtyIsSinking.MOD_ID, "boss_baby"), "main");
     
     private final ModelPart body;
     

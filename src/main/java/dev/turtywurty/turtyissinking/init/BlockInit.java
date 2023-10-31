@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class BlockInit {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
-        TurtyIsSinking.MODID);
+        TurtyIsSinking.MOD_ID);
     
     public static final RegistryObject<BackpackBlock> BACKPACK = BLOCKS.register("backpack", () -> new BackpackBlock(
         BlockBehaviour.Properties.of(Material.CLOTH_DECORATION).dynamicShape().noOcclusion().strength(2.5f, 10f)));
@@ -37,8 +37,8 @@ public class BlockInit {
         () -> new PlayerBoneBlock(BlockBehaviour.Properties.of(Material.EGG).dynamicShape().noOcclusion(),
             PlayerBone.BODY));
     
-    public static final RegistryObject<QuarryBlock> QUARRY = BLOCKS.register("quarry", () -> new QuarryBlock(
-        BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F)));
+//    public static final RegistryObject<QuarryBlock> QUARRY = BLOCKS.register("quarry", () -> new QuarryBlock(
+//        BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F)));
 
     public static final RegistryObject<PianoBlock> PIANO = BLOCKS.register("piano", () -> new PianoBlock(
         BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(5f).noOcclusion()));

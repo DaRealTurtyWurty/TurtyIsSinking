@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class WheelchairModel<T extends Wheelchair> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION =
-			new ModelLayerLocation(new ResourceLocation(TurtyIsSinking.MODID, "wheelchair"), "main");
+			new ModelLayerLocation(new ResourceLocation(TurtyIsSinking.MOD_ID, "wheelchair"), "main");
 	private final ModelPart frame;
 	private final ModelPart seat;
 	private final ModelPart feet;

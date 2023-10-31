@@ -17,9 +17,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class CameraModel extends Model {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-					new ResourceLocation(TurtyIsSinking.MODID, "camera"), "main");
+					new ResourceLocation(TurtyIsSinking.MOD_ID, "camera"), "main");
 
-	public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(TurtyIsSinking.MODID,
+	public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(TurtyIsSinking.MOD_ID,
 			"textures/item/camera.png");
 
 	private final ModelPart main;

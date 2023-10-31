@@ -12,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public final class EnchantmentInit {
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister
-        .create(ForgeRegistries.ENCHANTMENTS, TurtyIsSinking.MODID);
+        .create(ForgeRegistries.ENCHANTMENTS, TurtyIsSinking.MOD_ID);
     
     public static final RegistryObject<Enchantment> EXPLOSIVE_TOUCH = ENCHANTMENTS.register("explosive_touch",
         () -> new ModEnchantment(Rarity.RARE, EnchantmentCategory.DIGGER,

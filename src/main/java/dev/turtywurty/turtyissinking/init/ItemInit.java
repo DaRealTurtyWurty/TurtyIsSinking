@@ -9,13 +9,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
-        TurtyIsSinking.MODID);
+        TurtyIsSinking.MOD_ID);
     
     public static final RegistryObject<BackpackItem> BACKPACK = ITEMS.register("backpack",
         () -> new BackpackItem(defaultProps()));
@@ -40,8 +36,8 @@ public class ItemInit {
     public static final RegistryObject<CameraItem> CAMERA = ITEMS.register("camera",
         () -> new CameraItem(defaultProps().stacksTo(1)));
     
-    public static final RegistryObject<BlockItem> QUARRY = ITEMS.register("quarry",
-        () -> new BlockItem(BlockInit.QUARRY.get(), defaultProps()));
+//    public static final RegistryObject<BlockItem> QUARRY = ITEMS.register("quarry",
+//        () -> new BlockItem(BlockInit.QUARRY.get(), defaultProps()));
     
     public static final RegistryObject<SledgehammerItem> SLEDGEHAMMER = ITEMS.register("sledgehammer",
         () -> new SledgehammerItem(Tiers.IRON, 3, 2, defaultProps()));

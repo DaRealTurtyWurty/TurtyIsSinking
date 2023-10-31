@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public final class MenuInit {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.MENU_TYPES,
-        TurtyIsSinking.MODID);
+        TurtyIsSinking.MOD_ID);
     
     public static final RegistryObject<MenuType<BackpackMenu>> BACKPACK = MENU_TYPES.register("backpack",
         () -> new MenuType<>(BackpackMenu::new));

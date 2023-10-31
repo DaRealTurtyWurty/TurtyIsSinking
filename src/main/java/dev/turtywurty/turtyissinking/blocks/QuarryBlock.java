@@ -17,7 +17,7 @@ import net.minecraftforge.fml.DistExecutor;
 
 public class QuarryBlock extends TickingBlockEntityBlock<QuarryBlockEntity> {
     public QuarryBlock(Properties pProperties) {
-        super(pProperties, BlockEntityInit.QUARRY);
+        super(pProperties, /*BlockEntityInit.QUARRY*/ null);
     }
     
     @Override

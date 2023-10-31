@@ -10,7 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ParticleTypeInit {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES =
-            DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, TurtyIsSinking.MODID);
+            DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, TurtyIsSinking.MOD_ID);
 
     public static final RegistryObject<ParticleType<PlayerSkinParticleOption>> PLAYER_SKIN =
             PARTICLE_TYPES.register("player_skin", PlayerSkinParticleType::new);

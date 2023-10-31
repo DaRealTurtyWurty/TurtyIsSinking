@@ -22,6 +22,8 @@ import dev.turtywurty.turtyissinking.TurtyIsSinking;
 import dev.turtywurty.turtyissinking.blockentities.PianoBlockEntity;
 import dev.turtywurty.turtyissinking.client.screens.widgets.MusicWidget;
 import dev.turtywurty.turtyissinking.init.BlockEntityInit;
+import dev.turtywurty.turtyissinking.networking.PacketHandler;
+import dev.turtywurty.turtyissinking.networking.serverbound.SPianoKeyPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
@@ -34,7 +36,7 @@ import net.minecraftforge.client.gui.widget.ForgeSlider;
 
 // TODO: Figure out why it plays the button press sound when left clicking
 public class PianoScreen extends Screen {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(TurtyIsSinking.MODID,
+    private static final ResourceLocation TEXTURE = new ResourceLocation(TurtyIsSinking.MOD_ID,
         "textures/gui/piano.png");
 
     private int leftPos, topPos, imageWidth, imageHeight;
@@ -153,7 +155,7 @@ public class PianoScreen extends Screen {
     }
 
     public static class PianoKey extends MusicWidget {
-        private static final List<Note> NOTES = Arrays.asList(new Note("C", InputConstants.KEY_Q, (byte) 60),
+        public static final List<Note> NOTES = Arrays.asList(new Note("C", InputConstants.KEY_Q, (byte) 60),
             new Note("C#", InputConstants.KEY_A, (byte) 61), new Note("D", InputConstants.KEY_W, (byte) 62),
             new Note("D#", InputConstants.KEY_S, (byte) 63), new Note("E", InputConstants.KEY_E, (byte) 64),
             new Note("F", InputConstants.KEY_R, (byte) 65), new Note("F#", InputConstants.KEY_D, (byte) 66),
@@ -181,7 +183,7 @@ public class PianoScreen extends Screen {
 
             if (pKeyCode == InputConstants.KEY_K) {
                 for (byte b = 0; b < 127; b++) {
-                    this.midi.noteOn(b, this.velocity);
+                    PacketHandler.sendToServer(new SPianoKeyPacket(this.screen.piano.getBlockPos(), b, this.velocity));
                 }
             }
 
@@ -203,6 +205,11 @@ public class PianoScreen extends Screen {
         }
 
         @Override
+        protected void play() {
+            PacketHandler.sendToServer(new SPianoKeyPacket(this.screen.piano.getBlockPos(), this.note.noteId(), this.velocity));
+        }
+
+        @Override
         public void renderButton(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
             RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
             RenderSystem.setShaderTexture(0, TEXTURE);
@@ -215,7 +222,7 @@ public class PianoScreen extends Screen {
 
             if (isWhite(this.note)) {
                 this.screen.font.draw(pPoseStack, this.note.name(),
-                    this.getX() + this.width / 2 - this.screen.font.width(this.note.name()) / 2,
+                    this.getX() + this.width / 2f - this.screen.font.width(this.note.name()) / 2f,
                     this.getY() + this.height - this.screen.font.lineHeight, 0x202020);
             }
         }
@@ -292,7 +299,7 @@ public class PianoScreen extends Screen {
             return !isBlack(note);
         }
 
-        private static record Note(String name, int keyCode, byte noteId) {
+        public record Note(String name, int keyCode, byte noteId) {
 
         }
     }
