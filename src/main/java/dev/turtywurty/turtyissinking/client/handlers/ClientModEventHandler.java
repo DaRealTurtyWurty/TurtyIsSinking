@@ -120,7 +120,7 @@ public class ClientModEventHandler {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            MenuScreens.<BackpackMenu, BackpackScreen>register(MenuInit.BACKPACK.get(), (menu, inventory, ignored) -> new BackpackScreen(menu, inventory));
+            MenuScreens.register(MenuInit.BACKPACK.get(), BackpackScreen::new);
             MenuScreens.register(MenuInit.WHEELCHAIR.get(), WheelchairScreen::new);
         });
     }

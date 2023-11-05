@@ -16,7 +16,7 @@ public class BackpackScreen extends AbstractContainerScreen<BackpackMenu> {
         "textures/gui/backpack.png");
     private static final Component TITLE = Component.translatable("container." + TurtyIsSinking.MOD_ID + ".backpack");
     
-    public BackpackScreen(BackpackMenu menu, Inventory inventory) {
+    public BackpackScreen(BackpackMenu menu, Inventory inventory, Component ignored) {
         super(menu, inventory, TITLE);
         this.imageWidth = 176;
         this.imageHeight = 166;
