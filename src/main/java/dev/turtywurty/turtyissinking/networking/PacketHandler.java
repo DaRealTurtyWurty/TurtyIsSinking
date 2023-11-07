@@ -1,6 +1,7 @@
 package dev.turtywurty.turtyissinking.networking;
 
 import dev.turtywurty.turtyissinking.TurtyIsSinking;
+import dev.turtywurty.turtyissinking.networking.clientbound.CPianoKeyPacket;
 import dev.turtywurty.turtyissinking.networking.clientbound.CSyncPlayerBonesPacket;
 import dev.turtywurty.turtyissinking.networking.clientbound.CSyncWheelchairInventoryPacket;
 import dev.turtywurty.turtyissinking.networking.serverbound.SOpenBackpackPacket;
@@ -51,6 +52,18 @@ public final class PacketHandler {
                 .encoder(CSyncWheelchairInventoryPacket::encode)
                 .decoder(CSyncWheelchairInventoryPacket::new)
                 .consumerMainThread(CSyncWheelchairInventoryPacket::handle)
+                .add();
+
+        INSTANCE.messageBuilder(SPianoKeyPacket.class, index++, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(SPianoKeyPacket::encode)
+                .decoder(SPianoKeyPacket::new)
+                .consumerMainThread(SPianoKeyPacket::handle)
+                .add();
+
+        INSTANCE.messageBuilder(CPianoKeyPacket.class, index++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(CPianoKeyPacket::encode)
+                .decoder(CPianoKeyPacket::new)
+                .consumerMainThread(CPianoKeyPacket::handle)
                 .add();
 
         TurtyIsSinking.LOGGER.info("Registered {} packets for mod '{}'", index, TurtyIsSinking.MOD_ID);

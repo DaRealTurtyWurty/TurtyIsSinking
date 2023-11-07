@@ -33,6 +33,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.gui.widget.ForgeSlider;
+import org.jetbrains.annotations.NotNull;
 
 // TODO: Figure out why it plays the button press sound when left clicking
 public class PianoScreen extends Screen {
@@ -200,7 +201,7 @@ public class PianoScreen extends Screen {
         }
 
         @Override
-        public void playDownSound(SoundManager pHandler) {
+        public void playDownSound(@NotNull SoundManager pHandler) {
 
         }
 
