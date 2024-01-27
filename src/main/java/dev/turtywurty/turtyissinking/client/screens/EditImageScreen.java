@@ -64,6 +64,14 @@ public class EditImageScreen extends Screen {
     }
 
     @Override
+    public void onClose() {
+        super.onClose();
+
+        this.texture.upload();
+        this.texture.close();
+    }
+
+    @Override
     public void render(@NotNull PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         renderBackground(pPoseStack);
         drawImage(pPoseStack);
